@@ -21,23 +21,17 @@ export class AppComponent {
   onClickMap(e: MouseEvent) {
     this.TestActionsService.activeX=e.clientX;
     this.xClicked=e.clientX;
-    this.TestActionsService.activeY=e.clientY-25;
-    this.yClicked=e.clientY-25;
+    this.TestActionsService.activeY=e.clientY-10;
+    this.yClicked=e.clientY-10;
     console.log(e.clientX + " " + e.clientY);
-    this.cookiesTest = document.cookie;
-    console.log(this.cookiesTest);
-    document.cookie = "country=RUSSIA";
-    console.log(this.cookiesTest);
-    console.log(this.TestActionsService.getCookie("country"));
-
   }
-
-
 
   constructor(public TestActionsService: TestActionsService, cookies: CookieService) {
     if(document.cookie == "") {
 
     }else {
+
+
 
     }
   }
