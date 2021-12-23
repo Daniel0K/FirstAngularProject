@@ -1,0 +1,12 @@
+<app-map></app-map>
+<app-pins
+  *ngFor="let p of TestActionsService.houses" [inputPin]="p"
+  (click)="onClickPin(p)"
+></app-pins>
+<app-pins-form
+  [housesData]="TestActionsService.activePin"
+></app-pins-form>
+<app-add-house-form></app-add-house-form>
+<div (click)="onClickMap($event)" class="map"></div>
+<p class="debugCoords">{{xClicked}} {{yClicked}}</p>
+

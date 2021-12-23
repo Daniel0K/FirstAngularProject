@@ -1,0 +1,7 @@
+<form class="card" [formGroup]="form" (ngSubmit)="submit()">
+  <p>Добавление дома</p>
+  <input type="text" placeholder="Страна" formControlName="country">
+  <input type="text" placeholder="Улица" formControlName="street">
+  <input type="text" placeholder="Описание" formControlName="desc">
+  <button class="btn" type="submit" [disabled]="form.invalid">Отправить</button>
+</form>
