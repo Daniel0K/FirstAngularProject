@@ -12,8 +12,6 @@ export class AddHouseFormComponent implements OnInit {
   form:FormGroup;
   addHousePin:Pin = {} as Pin;
 
-
-
   constructor(private TestActionsService: TestActionsService) {
     this.form = new FormGroup({
     country: new FormControl('',[Validators.minLength(6),Validators.required]),
@@ -26,9 +24,9 @@ export class AddHouseFormComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.form)
-    console.log(this.form.value['country'])
-    console.log(this.TestActionsService.activeX + "TESTTEST")
+   // console.log(this.form)
+   // console.log(this.form.value['country'])
+   // console.log(this.TestActionsService.activeX + "TESTTEST")
     this.addHousePin = {id:this.TestActionsService.houses.length-1, x:this.TestActionsService.activeY, y:this.TestActionsService.activeX,name:this.form.value['country'],address:this.form.value['street'],desc:this.form.value['desc']}
     this.TestActionsService.addPin(this.addHousePin);
 
