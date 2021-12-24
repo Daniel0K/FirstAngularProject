@@ -1,7 +1,7 @@
 <app-map></app-map>
 <app-pins
-  *ngFor="let p of TestActionsService.houses" [inputPin]="p"
-  (click)="onClickPin(p)"
+  (click)="onClickPin(p)" *ngFor="let p of TestActionsService.houses"
+  [inputPin]="p"
 ></app-pins>
 <app-pins-form
   [housesData]="TestActionsService.activePin"

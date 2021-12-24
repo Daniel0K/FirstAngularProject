@@ -25,7 +25,7 @@ export class TestActionsService {
   activePin: Pin ={} as Pin;
   activeX:number = 999;
   activeY:number = 999;
-  cookie:string ="";
+  cookies: Pin[]= [];
 
   log(): void {
     console.log("test");
@@ -41,14 +41,8 @@ export class TestActionsService {
 
   addPin(p:Pin) {
     this.houses.push(p);
-    if (this.getCookie("pin")===undefined) {
-      this.cookie=JSON.stringify(p);
-    }else {
-      this.cookie = this.getCookie("pin") + JSON.stringify(p)
-      console.log(this.getCookie("pin") + "TestCookies")
-    }
-    this.setCookie(`pin`, this.cookie);
-    this.cookie="";
+    this.cookies.push(p);
+    document.cookie = `pin=${JSON.stringify(this.cookies)}`
   }
 
   getCookie(name: string) {
@@ -59,7 +53,7 @@ export class TestActionsService {
   }
 
   setCookie(name:string, value:string) {
-    let updatedCookie:string =`${name}:${value}`;
+    let updatedCookie:string =`${name}=${value}`;
     document.cookie = updatedCookie;
   }
 
