@@ -13,6 +13,18 @@ export class AppComponent {
   yClicked: number = 0;
   cookiesTest: Pin[]=[];
 
+  constructor(public TestActionsService: TestActionsService) {
+    if(document.cookie == "") {
+    }else {
+      this.cookiesTest = <Pin[]>JSON.parse(this.TestActionsService.getCookie("pin") || "");
+      for (let i=0;i<this.cookiesTest.length;i++) {
+        TestActionsService.houses.push(this.cookiesTest[i]);
+      }
+    }
+
+
+  }
+
   onClickPin(p:Pin) {
     console.log(p.id);
     this.TestActionsService.setActivePin(p);
@@ -24,25 +36,5 @@ export class AppComponent {
     this.TestActionsService.activeY=e.clientY-10;
     this.yClicked=e.clientY-10;
     console.log(e.clientX + " " + e.clientY);
-  }
-
-  constructor(public TestActionsService: TestActionsService) {
-    if(document.cookie == "") {
-
-    }else {
-      // console.log(JSON.parse(this.TestActionsService.getCookie("pin") || ""));
-      // console.log(Array.isArray(JSON.parse(this.TestActionsService.getCookie("pin") || "")))
-      this.cookiesTest = <Pin[]>JSON.parse(this.TestActionsService.getCookie("pin") || "");
-      console.log(this.cookiesTest);
-      console.log(typeof this.cookiesTest);
-      for (let i=0;i<this.cookiesTest.length;i++) {
-        TestActionsService.houses.push(this.cookiesTest[i]);
-      }
-      // console.log(<Pin[]>this.cookiesTest);
-
-
-    }
-
-
   }
 }

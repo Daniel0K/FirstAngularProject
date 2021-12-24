@@ -1,13 +1,13 @@
-<div class="card">
-<!--  <p>{{Houses.id}}</p>-->
-<!--  <p>{{Houses.x}}</p>-->
-<!--  <p>{{Houses.y}}</p>-->
+<form class="card" [formGroup]="form" (ngSubmit)="submit()">
   <p><strong>Название:</strong> {{TestActionsService.getActivePin().name}}</p>
   <p><strong>Адрес:</strong> {{TestActionsService.getActivePin().address}}</p>
-  <p><strong>Описание:</strong> {{TestActionsService.getActivePin().desc}}</p>
-
-
-</div>
+  <p><strong id="desc">Описание:</strong> {{TestActionsService.getActivePin().desc}}</p>
+  <p><i>Выберите дату начала аренды</i></p>
+  <input type="date" name="Start" formControlName="startDate">
+  <p><i>Выберите дату окончания аренды</i></p>
+  <input type="date" name="End" formControlName="endDate">
+  <button class="btn" type="submit" [disabled]="form.invalid">Забронировать Дом</button>
+</form>
 
 
 

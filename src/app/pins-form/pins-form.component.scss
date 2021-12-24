@@ -1,14 +1,26 @@
 .card {
-
   border: 1px solid black;
   display: block;
   position: absolute;
   left:1250px;
-  top:0px;
+  top:000px;
   width: 250px;
   margin-top: 2px;
 
   p {
     margin: 2px;
   }
+  input {
+    margin-top: 10px;
+    margin-left: 1px;
+    width: 96%;
+  }
+  .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px auto;
+  }
 }
+
+
