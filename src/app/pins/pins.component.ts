@@ -23,9 +23,9 @@ export class PinsComponent {
   }
 
   ngOnInit() {
-    console.log(this.inputPin.x)
+    //console.log(this.inputPin.x)
     this.styleCoord = `top: ${this.inputPin.x}px;left: ${this.inputPin.y}px;`
-    console.log(this.styleCoord)
+    //console.log(this.styleCoord)
   }
 
   ngOnChanges() {

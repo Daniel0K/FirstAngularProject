@@ -14,6 +14,11 @@ export interface Pin {
 })
 
 export class TestActionsService {
+
+  constructor() {
+
+  }
+
   houses: Pin[]= [
     {id:0,y:885,x:150,name:'Россия',address:'Лучший',desc:'Самое топовое место в мире '},
     {id:1,y:797,x:300,name:'Саудовская Аравия',address:'Лучший',desc:''},
@@ -25,7 +30,7 @@ export class TestActionsService {
   activePin: Pin ={} as Pin;
   activeX:number = 999;
   activeY:number = 999;
-  cookies: Pin[]= [];
+  additionalHousesCookies: Pin[]= [];
 
   log(): void {
     console.log("test");
@@ -41,8 +46,8 @@ export class TestActionsService {
 
   addPin(p:Pin) {
     this.houses.push(p);
-    this.cookies.push(p);
-    document.cookie = `pin=${JSON.stringify(this.cookies)}`
+    this.additionalHousesCookies.push(p);
+    document.cookie = `pin=${JSON.stringify(this.additionalHousesCookies)}`
   }
 
   getCookie(name: string) {
@@ -57,8 +62,5 @@ export class TestActionsService {
     document.cookie = updatedCookie;
   }
 
-  constructor() {
-
-  }
 
 }
