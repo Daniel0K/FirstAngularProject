@@ -15,7 +15,6 @@ export interface bookings {
   endDate: Date;
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -56,6 +55,19 @@ export class TestActionsService {
     this.houses.push(p);
     this.additionalHousesCookies.push(p);
     document.cookie = `pin=${JSON.stringify(this.additionalHousesCookies)}`
+    //
+    // console.log("TET")
+    // console.log(this.additionalHousesCookies);
+  }
+
+  updatedCookies(): void {
+
+  }
+
+
+
+  addPinToCookie (p:Pin) {
+
   }
 
   getCookie(name: string) {

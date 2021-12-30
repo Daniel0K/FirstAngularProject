@@ -12,18 +12,81 @@ export class AppComponent {
   xClicked: number = 0;
   yClicked: number = 0;
   cookiesTest: Pin[]=[];
+  cookiesTest2: Pin[]=[];
 
   constructor(public TestActionsService: TestActionsService) {
     if(document.cookie == "") {
+
     }else {
-      this.cookiesTest = <Pin[]>JSON.parse(this.TestActionsService.getCookie("pin") || "");
-      for (let i=0;i<this.cookiesTest.length;i++) {
-        TestActionsService.houses.push(this.cookiesTest[i]);
+      try {
+        this.cookiesTest = <Pin[]>JSON.parse(this.TestActionsService.getCookie("pin") || "");
+        for (let i=0;i<this.cookiesTest.length;i++) {
+          TestActionsService.houses.push(this.cookiesTest[i]);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+
+
+
+    //  this.cookiesTest.forEach((element, index) => {
+    //    if(element.id === item.id) {
+    //      this.cookiesTest[index] = item;
+    //    }
+    // });
+    //   for (let i=0;i<this.cookiesTest.length;i++)
+    //   for (let i=0;i<this.cookiesTest.length;i++) {
+    //     // this.TestActionsService.houses.forEach((element, index) => {
+    //     //   if (element.id === this.cookiesTest[i].id) {
+    //     //     this.TestActionsService.houses[index] = this.cookiesTest[i];
+    //     //   }else {
+    //     //     TestActionsService.houses.push(this.cookiesTest[i]);
+    //     //   }
+    //     // })
+    //     //  TestActionsService.houses[].id == cookiesTest[i].id
+    //         TestActionsService.houses.push(this.cookiesTest[i]);
+    //   }
+      try {
+        this.cookiesTest = <Pin[]>JSON.parse(this.TestActionsService.getCookie("updatedPins") || "");
+        for (let i=0;i<this.cookiesTest.length;i++) {
+          this.TestActionsService.houses[this.cookiesTest[i].id]=this.cookiesTest[i];
+        }
+      } catch (e) {
+        console.log(e);
+      }
+
+
+
+
+      if (JSON.parse(this.TestActionsService.getCookie("updatedPins") || "") == "") {
+
+      } else {
+
       }
     }
-
-
   }
+
+      // this.cookiesTest2 = <Pin[]>JSON.parse(this.TestActionsService.getCookie("updatedPins") || "");
+      //
+      //
+      //
+      // // this.TestActionsService.houses.forEach((element, index) => {
+      // //
+      // // })
+      //
+      // for (let i=0;i<this.cookiesTest2.length;i++) {
+      //   this.TestActionsService.houses[this.cookiesTest2[i].id]=this.cookiesTest2[i];
+      // }
+      //
+      // this.cookiesTest.forEach((element, index) => {
+      //      if(element.id === item.id) {
+      //        this.cookiesTest[index] = item;
+      //      }
+      //   });
+
+
+    //
+
 
   onClickPin(p:Pin) {
     console.log(p.id);

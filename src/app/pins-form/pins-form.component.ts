@@ -31,13 +31,17 @@ export class PinsFormComponent implements OnInit {
   submit() {
     this.TestActionsService.submittedBooking = {startDate:this.form.value['startDate'],endDate:this.form.value['endDate']};
     if (this.TestActionsService.checkCrossings4DatesPeriod(this.TestActionsService.submittedBooking,this.TestActionsService.houses[this.TestActionsService.activePin.id].booked)) {
-        console.log("TRUE");
+        console.log("Бронирование пересекается");
     } else {
       this.TestActionsService.houses[this.TestActionsService.activePin.id].booked.push(this.TestActionsService.submittedBooking);
-      console.log("FALSE");
+      this.TestActionsService.setCookie("updatedPins","");
+      document.cookie = `updatedPins=${JSON.stringify(this.TestActionsService.houses)}`
+      console.log("Бронирование не пересекается");
     }
 
     console.log(this.TestActionsService.houses[this.TestActionsService.activePin.id].booked)
+
+
     //
     // this.checkCrossings4DatesPeriod(this.submittedBooking,this.TestActionsService.houses[this.TestActionsService.activePin.id].booked);
     // this.TestActionsService.houses[this.TestActionsService.activePin.id].booked.push(this.submittedBooking);
