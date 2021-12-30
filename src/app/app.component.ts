@@ -18,14 +18,14 @@ export class AppComponent {
     if(document.cookie == "") {
 
     }else {
-      try {
-        this.cookiesTest = <Pin[]>JSON.parse(this.TestActionsService.getCookie("pin") || "");
-        for (let i=0;i<this.cookiesTest.length;i++) {
-          TestActionsService.houses.push(this.cookiesTest[i]);
-        }
-      } catch (e) {
-        console.log(e);
-      }
+      // try {
+      //   this.cookiesTest = <Pin[]>JSON.parse(this.TestActionsService.getCookie("pin") || "");
+      //   for (let i=0;i<this.cookiesTest.length;i++) {
+      //     TestActionsService.houses.push(this.cookiesTest[i]);
+      //   }
+      // } catch (e) {
+      //   console.log(e);
+      // }
 
 
 
@@ -46,23 +46,33 @@ export class AppComponent {
     //     //  TestActionsService.houses[].id == cookiesTest[i].id
     //         TestActionsService.houses.push(this.cookiesTest[i]);
     //   }
-      try {
-        this.cookiesTest = <Pin[]>JSON.parse(this.TestActionsService.getCookie("updatedPins") || "");
-        for (let i=0;i<this.cookiesTest.length;i++) {
-          this.TestActionsService.houses[this.cookiesTest[i].id]=this.cookiesTest[i];
-        }
-      } catch (e) {
-        console.log(e);
-      }
+    //   try {
+    //     this.cookiesTest = <Pin[]>JSON.parse(this.TestActionsService.getCookie("updatedPins") || "");
+    //     for (let i=0;i<this.cookiesTest.length;i++) {
+    //       this.TestActionsService.houses[this.cookiesTest[i].id]=this.cookiesTest[i];
+    //     }
+    //   } catch (e) {
+    //     console.log(e);
+    //   }
 
-
-
-
-      if (JSON.parse(this.TestActionsService.getCookie("updatedPins") || "") == "") {
-
+      if (JSON.parse(this.TestActionsService.getCookie("pin") || "") === "") {
+            return;
       } else {
-
+        this.cookiesTest = <Pin[]>JSON.parse(this.TestActionsService.getCookie("pin") || "");
+          for (let i=0;i<this.cookiesTest.length;i++) {
+            TestActionsService.houses.push(this.cookiesTest[i]);
+          }
       }
+
+      if (JSON.parse(this.TestActionsService.getCookie("updatedPins") || "") === "") {
+        return;
+      } else {
+          this.cookiesTest = <Pin[]>JSON.parse(this.TestActionsService.getCookie("updatedPins") || "");
+          for (let i=0;i<this.cookiesTest.length;i++) {
+            this.TestActionsService.houses[this.cookiesTest[i].id] = this.cookiesTest[i];
+          }
+      }
+
     }
   }
 
