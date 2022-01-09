@@ -41,15 +41,15 @@ jobs:
         uses: actions/setup-node@v1
 
       - name: Install Dependencies
-          run: |
+        run: |
             npm ci
 
       - name: Build
-          run: |
+        run: |
             npm run build -- --prod
 
       - name: Test
-          run: |
+        run: |
             npm run test -- --prod
 #      -
 #        name: Login to Docker Hub
