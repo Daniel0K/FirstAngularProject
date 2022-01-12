@@ -53,20 +53,20 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/angular:v_0.0.1
 
-  deployToProd:
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Run deploy on server"
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          password: ${{ secrets.SERVER_PASSWORD }}
-          port: ${{ secrets.SERVER_PORT }}
-          script: |
-            sudo docker kill $(docker ps -q)
-            sudo docker pull daniel0k/angular:v_0.0.1
-            sudo docker run -d -p 81:80 daniel0k/angular:v_0.0.1
+#  deployToProd:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: "Run deploy on server"
+#        uses: appleboy/ssh-action@master
+#        with:
+#          host: ${{ secrets.SERVER_HOST }}
+#          username: ${{ secrets.SERVER_USERNAME }}
+#          password: ${{ secrets.SERVER_PASSWORD }}
+#          port: ${{ secrets.SERVER_PORT }}
+#          script: |
+#            sudo docker kill $(docker ps -q)
+#            sudo docker pull daniel0k/angular:v_0.0.1
+#            sudo docker run -d -p 81:80 daniel0k/angular:v_0.0.1
 #      # Runs a single command using the runners shell
 #      - name: Run a one-line script
 #        run: echo Hello, world!
