@@ -56,3 +56,4 @@ jobs:
       - name: Echo
         run: |
           echo $GITHUB_RUN_NUMBER
+          echo $GITHUB_RUN_ID
