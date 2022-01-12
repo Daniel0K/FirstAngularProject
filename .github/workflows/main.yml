@@ -15,7 +15,6 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   buildDockerArtifact:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -57,3 +56,20 @@ jobs:
         run: |
           echo $GITHUB_RUN_NUMBER
           echo $GITHUB_RUN_ID
+
+#  deployToProd:
+##    needs: buildDockerArtifact
+##    if: false
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: "Run deploy on server"
+#        uses: appleboy/ssh-action@master
+#        with:
+#          host: ${{ secrets.SERVER_HOST }}
+#          username: ${{ secrets.SERVER_USERNAME }}
+#          password: ${{ secrets.SERVER_PASSWORD }}
+#          port: ${{ secrets.SERVER_PORT }}
+#          script: |
+#            sudo docker kill $(docker ps -q)
+#            sudo docker pull daniel0k/angular:v_0.0.1
+#            sudo docker run -d -p 81:80 daniel0k/angular:v_0.0.1
