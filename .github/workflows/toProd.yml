@@ -1,0 +1,25 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+ deployToProd:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Run deploy on server"
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          script: |
+            sudo docker kill $(docker ps -q)
+            sudo docker pull daniel0k/angular:v_0.0.1
+            sudo docker run -d -p 81:80 daniel0k/angular:v_0.0.1
