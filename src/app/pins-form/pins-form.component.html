@@ -6,7 +6,7 @@
   <p>Активные бронирования: </p>
   <div *ngFor="let p of TestActionsService.getActivePin().booked"
   >{{p.startDate}} - {{p.endDate}}</div>
-  <p><i>Выберите дату начала аренды1</i></p>
+  <p><i>Выберите дату начала аренды</i></p>
   <input type="date" name="Start" formControlName="startDate">
   <p><i>Выберите дату окончания аренды</i></p>
   <input type="date" name="End" formControlName="endDate">
