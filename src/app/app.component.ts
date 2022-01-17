@@ -13,8 +13,12 @@ export class AppComponent {
   yClicked: number = 0;
   cookiesTest: Pin[]=[];
   cookiesTest2: Pin[]=[];
+  currentHouses: Pin[]=[];
+  activePin:Pin= {} as Pin;
 
-  constructor(public TestActionsService: TestActionsService) {
+  constructor(private TestActionsService: TestActionsService) {
+    this.currentHouses = TestActionsService.getCurrentHouses();
+    this.activePin = TestActionsService.activePin;
     if(document.cookie == "") {
 
     }else {

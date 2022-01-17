@@ -43,6 +43,12 @@ export class TestActionsService {
     console.log("test");
   }
 
+  getCurrentHouses():Pin[] {
+    return this.houses;
+  }
+
+
+
   getActivePin():Pin {
     return this.activePin;
   }

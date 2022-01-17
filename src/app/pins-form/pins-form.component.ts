@@ -11,10 +11,11 @@ import {Conditional} from "@angular/compiler";
 })
 export class PinsFormComponent implements OnInit {
   @Input() housesData!: Pin
+  activePin:Pin = {} as Pin;
 
 
   form: FormGroup;
-  constructor(public TestActionsService: TestActionsService) {
+  constructor(private TestActionsService: TestActionsService) {
     this.form = new FormGroup({
       startDate: new FormControl('',[Validators.required]),
       endDate: new FormControl('',[Validators.required])
@@ -26,6 +27,10 @@ export class PinsFormComponent implements OnInit {
   }
 
   ngOnChanges () {
+  }
+
+  ngDoCheck() {
+    this.activePin = this.TestActionsService.getActivePin();
   }
 
   submit() {

@@ -1,10 +1,10 @@
 <form class="card" [formGroup]="form" (ngSubmit)="submit()">
-  <p><strong>Название:</strong> {{TestActionsService.getActivePin().name}}</p>
-  <p><strong>Адрес:</strong> {{TestActionsService.getActivePin().address}}</p>
-  <p><strong id="desc">Описание:</strong> {{TestActionsService.getActivePin().desc}}</p>
+  <p><strong>Название:</strong> {{activePin.name}}</p>
+  <p><strong>Адрес:</strong> {{activePin.address}}</p>
+  <p><strong id="desc">Описание:</strong> {{activePin.desc}}</p>
 
   <p>Активные бронирования: </p>
-  <div *ngFor="let p of TestActionsService.getActivePin().booked"
+  <div *ngFor="let p of activePin.booked"
   >{{p.startDate}} - {{p.endDate}}</div>
   <p><i>Выберите дату начала аренды</i></p>
   <input type="date" name="Start" formControlName="startDate">
