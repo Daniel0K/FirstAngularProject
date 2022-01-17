@@ -10,7 +10,7 @@ import {TestActionsService, Pin} from "../services/test-actions.service";
 export class AddHouseFormComponent implements OnInit {
 
   form:FormGroup;
-  addHousePin:Pin = {} as Pin;
+  newHousePin:Pin = {} as Pin;
 
   constructor(private TestActionsService: TestActionsService) {
     this.form = new FormGroup({
@@ -24,11 +24,8 @@ export class AddHouseFormComponent implements OnInit {
   }
 
   submit() {
-   // console.log(this.form)
-   // console.log(this.form.value['country'])
-   // console.log(this.TestActionsService.activeX + "TESTTEST")
-    this.addHousePin = {id:this.TestActionsService.houses.length, x:this.TestActionsService.activeY, y:this.TestActionsService.activeX,name:this.form.value['country'],address:this.form.value['street'],desc:this.form.value['desc'],booked:[]}
-    this.TestActionsService.addPin(this.addHousePin);
-    this.TestActionsService.setActivePin(this.addHousePin);
+    this.newHousePin = {id:this.TestActionsService.houses.length, x:this.TestActionsService.activeY, y:this.TestActionsService.activeX,name:this.form.value['country'],address:this.form.value['street'],desc:this.form.value['desc'],booked:[]}
+    this.TestActionsService.addPin(this.newHousePin);
+    this.TestActionsService.setActivePin(this.newHousePin);
   }
 }

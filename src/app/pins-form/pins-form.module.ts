@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {PinsModule} from "../pins/pins.module";
-import {PinsComponent} from "../pins/pins.component";
 
 
 
@@ -12,6 +11,7 @@ import {PinsComponent} from "../pins/pins.component";
     PinsModule
   ],
   exports: []
+
 })
 export class PinsFormModule {
 

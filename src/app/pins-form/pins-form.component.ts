@@ -13,7 +13,6 @@ export class PinsFormComponent implements OnInit {
   @Input() housesData!: Pin
   activePin:Pin = {} as Pin;
 
-
   form: FormGroup;
   constructor(private TestActionsService: TestActionsService) {
     this.form = new FormGroup({

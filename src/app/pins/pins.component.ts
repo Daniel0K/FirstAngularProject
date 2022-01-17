@@ -9,31 +9,28 @@ import {Pin, TestActionsService} from "../services/test-actions.service";
 export class PinsComponent {
   @Input() inputPin!: Pin
 
-  styleTop: string = ""
-  styleLeft: string = ""
-  styleCoord: string = ""
-  test: string =''
+  styleCord: string = ""
+  styleActivePinColor: string='';
 
   constructor(private TestActionsService: TestActionsService) {
-    if (this.inputPin == undefined) {
-      console.log("constructor - undefined")
-    }
-    // console.log(TestActionsService.houses);
-
+    // if (this.inputPin == undefined) {
+    //   console.log("constructor - undefined")
+    // }
   }
 
   ngOnInit() {
-    //console.log(this.inputPin.x)
-    this.styleCoord = `top: ${this.inputPin.x}px;left: ${this.inputPin.y}px;`
-    //console.log(this.styleCoord)
+    this.changeStylePosition(this.inputPin.x,this.inputPin.y);
   }
 
   ngOnChanges() {
 
   }
 
+  ngDoCheck() {
 
-  onClickedPin():void {
+  }
 
+  changeStylePosition(x:number,y:number):void {
+    this.styleCord = `top: ${x}px;left: ${y}px;`
   }
 }

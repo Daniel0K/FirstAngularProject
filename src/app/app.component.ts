@@ -19,6 +19,7 @@ export class AppComponent {
   constructor(private TestActionsService: TestActionsService) {
     this.currentHouses = TestActionsService.getCurrentHouses();
     this.activePin = TestActionsService.activePin;
+    TestActionsService.setActivePin(TestActionsService.houses[0]);
     if(document.cookie == "") {
 
     }else {
@@ -105,6 +106,7 @@ export class AppComponent {
   onClickPin(p:Pin) {
     console.log(p.id);
     this.TestActionsService.setActivePin(p);
+
   }
 
   onClickMap(e: MouseEvent) {

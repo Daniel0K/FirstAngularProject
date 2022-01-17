@@ -39,14 +39,9 @@ export class TestActionsService {
   additionalHousesCookies: Pin[]= [];
   submittedBooking:bookings = {} as bookings;
 
-  log(): void {
-    console.log("test");
-  }
-
   getCurrentHouses():Pin[] {
     return this.houses;
   }
-
 
 
   getActivePin():Pin {
@@ -61,19 +56,6 @@ export class TestActionsService {
     this.houses.push(p);
     this.additionalHousesCookies.push(p);
     document.cookie = `pin=${JSON.stringify(this.additionalHousesCookies)}`
-    //
-    // console.log("TET")
-    // console.log(this.additionalHousesCookies);
-  }
-
-  updatedCookies(): void {
-
-  }
-
-
-
-  addPinToCookie (p:Pin) {
-
   }
 
   getCookie(name: string) {
@@ -100,15 +82,5 @@ export class TestActionsService {
       }
     }
     return false;
-    //
-    //
-    //
-    //
-    // console.log(StartDate1)
-    // console.log(EndDate1)
-    // console.log(StartDate2)
-    // console.log(EndDate2)
   }
-
-
 }
