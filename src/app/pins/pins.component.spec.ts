@@ -22,9 +22,13 @@ describe('Pins', () => {
   //   expect(component).toBeDefined();
   // })
   it ('should call ng0nInit and change StyleCord var', ()=> {
-      const spy = spyOn(component,'ngOnInit').and.callFake(() => {
+      const spy = jest.spyOn(component,'ngOnInit').mockImplementation( ()=> {
         component.changeStylePosition(100,150);
       })
+
+    jest.fn(()=> {
+
+    })
     component.ngOnInit();
     expect(component.styleCord).toBe("top: 100px;left: 150px;")
   })

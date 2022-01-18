@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {bookings, TestActionsService} from "./test-actions.service";
 import {generate} from "rxjs";
+import {jest} from '@jest/globals'
 
 describe('test-actions-service', () => {
   let service: TestActionsService;
@@ -58,17 +59,20 @@ describe('test-actions-service', () => {
     // console.log(prevBookings)
   })
 
-  it('should be getcookie', () => {
-
-    const spy = spyOn(service,'getCookie').and.returnValue(undefined);
-
-    let test = service.getCookie('pin');
-    expect(spy).toHaveBeenCalled();
-    // expect(test).toBeTruthy();
-  })
+  // it('should be getcookie', () => {
+  //
+  //   const spy = jest.spyOn(service,'getCookie').mockReturnValue(undefined);
+  //
+  //   let test = service.getCookie('pin');
+  //   expect(spy).toHaveBeenCalled();
+  //   // expect(test).toBeTruthy();
+  // })
   // it ('should became on 1 more', () => {
   //   let de = service.getActivePin();
   // })
 
+  it('should return activepin',()=> {
+
+  })
 
 })

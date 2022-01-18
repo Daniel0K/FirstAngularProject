@@ -12,6 +12,7 @@ import {Conditional} from "@angular/compiler";
 export class PinsFormComponent implements OnInit {
   @Input() housesData!: Pin
   activePin:Pin = {} as Pin;
+  submittedBooking:bookings={} as bookings;
 
   form: FormGroup;
   constructor(private TestActionsService: TestActionsService) {
@@ -33,17 +34,19 @@ export class PinsFormComponent implements OnInit {
   }
 
   submit() {
-    this.TestActionsService.submittedBooking = {startDate:this.form.value['startDate'],endDate:this.form.value['endDate']};
-    if (this.TestActionsService.checkCrossings4DatesPeriod(this.TestActionsService.submittedBooking,this.TestActionsService.houses[this.TestActionsService.activePin.id].booked)) {
+    this.submittedBooking = {startDate:this.form.value['startDate'],endDate:this.form.value['endDate']};
+    //this.TestActionsService.submittedBooking = {startDate:this.form.value['startDate'],endDate:this.form.value['endDate']};
+    if (this.TestActionsService.checkCrossings4DatesPeriod(this.TestActionsService.submittedBooking,this.TestActionsService.houses[this.activePin.id].booked)) {
         console.log("Бронирование пересекается");
     } else {
-      this.TestActionsService.houses[this.TestActionsService.activePin.id].booked.push(this.TestActionsService.submittedBooking);
+      this.TestActionsService.addBookingToHouseById(this.activePin.id,this.submittedBooking)
+      //this.TestActionsService.houses[this.activePin.id].booked.push(this.TestActionsService.submittedBooking);
       this.TestActionsService.setCookie("updatedPins","");
       document.cookie = `updatedPins=${JSON.stringify(this.TestActionsService.houses)}`
       console.log("Бронирование не пересекается");
     }
 
-    console.log(this.TestActionsService.houses[this.TestActionsService.activePin.id].booked)
+    console.log(this.TestActionsService.houses[this.activePin.id].booked)
 
 
     //

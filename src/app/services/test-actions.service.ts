@@ -43,6 +43,10 @@ export class TestActionsService {
     return this.houses;
   }
 
+  addBookingToHouseById(id:number, submittedBooking:bookings) {
+    this.houses[id].booked.push(submittedBooking);
+  }
+
 
   getActivePin():Pin {
     return this.activePin;

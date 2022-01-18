@@ -23,6 +23,11 @@ export class AppComponent {
     if(document.cookie == "") {
 
     }else {
+
+      this.checkPinCookies();
+      this.checkUpdatedPinCookies();
+
+
       // try {
       //   this.cookiesTest = <Pin[]>JSON.parse(this.TestActionsService.getCookie("pin") || "");
       //   for (let i=0;i<this.cookiesTest.length;i++) {
@@ -60,23 +65,9 @@ export class AppComponent {
     //     console.log(e);
     //   }
 
-      if (JSON.parse(this.TestActionsService.getCookie("pin") || "") === "") {
-            return;
-      } else {
-        this.cookiesTest = <Pin[]>JSON.parse(this.TestActionsService.getCookie("pin") || "");
-          for (let i=0;i<this.cookiesTest.length;i++) {
-            TestActionsService.houses.push(this.cookiesTest[i]);
-          }
-      }
 
-      if (JSON.parse(this.TestActionsService.getCookie("updatedPins") || "") === "") {
-        return;
-      } else {
-          this.cookiesTest = <Pin[]>JSON.parse(this.TestActionsService.getCookie("updatedPins") || "");
-          for (let i=0;i<this.cookiesTest.length;i++) {
-            this.TestActionsService.houses[this.cookiesTest[i].id] = this.cookiesTest[i];
-          }
-      }
+
+
 
     }
   }
@@ -101,6 +92,27 @@ export class AppComponent {
 
 
     //
+  checkPinCookies() {
+    if (JSON.parse(this.TestActionsService.getCookie("pin") || "") === "") {
+      return;
+    } else {
+      this.cookiesTest = <Pin[]>JSON.parse(this.TestActionsService.getCookie("pin") || "");
+      for (let i=0;i<this.cookiesTest.length;i++) {
+        this.TestActionsService.houses.push(this.cookiesTest[i]);
+      }
+    }
+  }
+
+  checkUpdatedPinCookies() {
+    if (JSON.parse(this.TestActionsService.getCookie("updatedPins") || "") === "") {
+      return;
+    } else {
+      this.cookiesTest = <Pin[]>JSON.parse(this.TestActionsService.getCookie("updatedPins") || "");
+      for (let i=0;i<this.cookiesTest.length;i++) {
+        this.TestActionsService.houses[this.cookiesTest[i].id] = this.cookiesTest[i];
+      }
+    }
+  }
 
 
   onClickPin(p:Pin) {
