@@ -76,7 +76,7 @@ describe('AppComponent', () => {
     document.cookie='updatedPins=[{"id":0,"y":885,"x":150,"name":"Не россия","address":"Лучший","desc":"Самое топовое место в мире ","booked":[{"startDate":"2021-12-27","endDate":"2021-12-28"}]},{"id":1,"y":797,"x":300,"name":"Саудовская Аравия","address":"Лучший","desc":"","booked":[]},{"id":2,"y":300,"x":150,"name":"Канада","address":"Лучший","desc":"","booked":[]},{"id":3,"y":1100,"x":500,"name":"Австралия","address":"Лучший","desc":"","booked":[]},{"id":4,"y":455,"x":427,"name":"Бразилия","address":"Лучший","desc":"","booked":[]},{"id":5,"y":453,"x":601,"name":"Мадагаскар","address":"Лучший","desc":"","booked":[]}]'
     component.checkUpdatedPinCookies();
     expect(service.houses[0].name).toBe('Не россия');
-    //deleteAllCookies();
+    deleteAllCookies();
   })
 
 });

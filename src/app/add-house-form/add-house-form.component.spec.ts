@@ -79,11 +79,5 @@ describe('AddHouseForm', () => {
     component.submit();
 
     expect(service.houses[service.houses.length-1]).toBe(component.newHousePin);
-
-    // expect(service.houses[service.houses.length-1].x).toBe(200);
-    // expect(service.houses[service.houses.length-1].y).toBe(100);
-    // expect(service.houses[service.houses.length-1].desc).toBe('ТестТест3');
-    // expect(service.houses[service.houses.length-1].address).toBe('ТестТест2');
-    // expect(service.houses[service.houses.length-1].name).toBe('ТестТест1');
   })
 })

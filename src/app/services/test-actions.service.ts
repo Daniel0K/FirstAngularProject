@@ -79,9 +79,7 @@ export class TestActionsService {
     for (let i=0;i<existBookings.length;i++) {
       if (currentBooking.startDate <= existBookings[i].endDate && existBookings[i].startDate <= currentBooking.endDate) {
         return true;
-        // console.log("пересекаются")
       }else {
-        // console.log("не пересекаются")
         continue;
       }
     }

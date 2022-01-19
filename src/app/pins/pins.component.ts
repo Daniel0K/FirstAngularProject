@@ -20,14 +20,6 @@ export class PinsComponent {
     this.changeStylePosition(this.inputPin.x,this.inputPin.y);
   }
 
-  ngOnChanges() {
-
-  }
-
-  ngDoCheck() {
-
-  }
-
   changeStylePosition(x:number,y:number):void {
     this.styleCord = `top: ${x}px;left: ${y}px;`
   }

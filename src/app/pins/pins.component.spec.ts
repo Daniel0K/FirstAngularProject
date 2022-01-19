@@ -17,10 +17,6 @@ describe('Pins', () => {
   })
 
   it ('should set x and y for first appearing of pin on map', ()=> {
-      // const spy = jest.spyOn(component,'ngOnInit').mockImplementation( ()=> {
-      //   component.changeStylePosition(100,150);
-      // })
-
     let x: number = 100;
     let y: number = 150;
 
