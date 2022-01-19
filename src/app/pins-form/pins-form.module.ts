@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {PinsModule} from "../pins/pins.module";
+import {PinsFormComponent} from "./pins-form.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [PinsFormComponent],
   imports: [
     CommonModule,
-    PinsModule
+    PinsModule,
+    ReactiveFormsModule
   ],
-  exports: []
+  exports: [PinsFormComponent]
 
 })
 export class PinsFormModule {

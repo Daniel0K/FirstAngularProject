@@ -116,7 +116,7 @@ export class AppComponent {
 
 
   onClickPin(p:Pin) {
-    console.log(p.id);
+    //console.log(p.id);
     this.TestActionsService.setActivePin(p);
 
   }
@@ -126,6 +126,6 @@ export class AppComponent {
     this.xClicked=e.clientX;
     this.TestActionsService.activeY=e.clientY-10;
     this.yClicked=e.clientY-10;
-    console.log(e.clientX + " " + e.clientY);
+    //console.log(e.clientX + " " + e.clientY);
   }
 }

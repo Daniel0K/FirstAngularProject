@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
-import {bookings, TestActionsService} from "./test-actions.service";
-import {generate} from "rxjs";
+import {bookings, Pin, TestActionsService} from "./test-actions.service";
+import {combineAll, generate} from "rxjs";
 import {jest} from '@jest/globals'
 
 describe('test-actions-service', () => {
@@ -71,8 +71,18 @@ describe('test-actions-service', () => {
   //   let de = service.getActivePin();
   // })
 
-  it('should return activepin',()=> {
-
+  it('should return activePin',()=> {
+    service.activePin = {
+      id:0,
+      y:100,
+      x:100,
+      name:'Тестовандия',
+      address:'Тестовый',
+      desc:'Тестовая среда',
+      booked:[]
+    }
+     let activePin:Pin = service.getActivePin()
+    expect(service.activePin).toBe(activePin);
   })
 
 })
