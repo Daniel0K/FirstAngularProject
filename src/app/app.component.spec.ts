@@ -60,7 +60,7 @@ describe('AppComponent', () => {
       {clientX: 50, clientY: 150, buttons: 1})
     component.onClickMap(e);
     expect(service.activeX).toBe(50);
-    expect(service.activeY).toBe(140);
+    expect(service.activeY).toBe(141);
   })
 
   it('should push new pins to service houses',()=> {
