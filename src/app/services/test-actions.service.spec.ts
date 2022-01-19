@@ -1,7 +1,5 @@
-import {Injectable} from "@angular/core";
 import {bookings, Pin, TestActionsService} from "./test-actions.service";
-import {combineAll, generate} from "rxjs";
-import {jest} from '@jest/globals'
+import {newArray} from "@angular/compiler/src/util";
 
 describe('test-actions-service', () => {
   let service: TestActionsService;
@@ -16,63 +14,52 @@ describe('test-actions-service', () => {
   }
   beforeEach( () => {service = new TestActionsService();})
 
-  it ('should will houses be increased to one more', () => {
-    let defaultLenght:number = service.houses.length;
+  it ('should increase houses to one more', () => {
+    let defaultLength:number = service.houses.length;
+
     service.addPin(fakePin);
-    expect(service.houses.length).toBe(defaultLenght+1);
+
+    expect(service.houses.length).toBe(defaultLength+1);
   })
 
-  it ('should return false if doesnt crossing', () => {
+  it ('should check bookings date for crossings. It will be return false because no crossing', () => {
     let newBooking = {} as bookings;
     let prevBookings = [];
-    let tempBook = {} as bookings;
-
+    let tempBook1 = {} as bookings;
+    let tempBook2 = {} as bookings;
     newBooking.startDate = new Date(2021,5,21);
     newBooking.endDate = new Date(2021,5,22);
-    tempBook.startDate = new Date(2021,5,25);
-    tempBook.endDate = new Date(2021,5,26);
-    prevBookings.push(tempBook);
-    tempBook.startDate = new Date(2021,5,27);
-    tempBook.endDate = new Date(2021,5,28);
-    prevBookings.push(tempBook);
+    tempBook1.startDate = new Date(2021,5,25);
+    tempBook1.endDate = new Date(2021,5,26);
+    tempBook2.startDate = new Date(2021,5,27);
+    tempBook2.endDate = new Date(2021,5,28);
+
+    prevBookings.push(tempBook1);
+    prevBookings.push(tempBook2);
+
     expect(service.checkCrossings4DatesPeriod(newBooking,prevBookings)).toBeFalsy();
   })
 
-  it ('should return true if crossing', () => {
+  it ('should check bookings date for crossings. It will be return true because crossing exist', () => {
     let newBooking = {} as bookings;
     let prevBookings = [];
-    let tempBook = {} as bookings;
-
+    let tempBook1 = {} as bookings;
+    let tempBook2 = {} as bookings;
     newBooking.startDate = new Date(2021,5,20);
     newBooking.endDate = new Date(2021,5,28);
+    tempBook1.startDate = new Date(2021,5,25);
+    tempBook1.endDate = new Date(2021,5,26);
+    tempBook2.startDate = new Date(2021,5,27);
+    tempBook2.endDate = new Date(2021,5,28);
 
-    tempBook.startDate = new Date(2021,5,25);
-    tempBook.endDate = new Date(2021,5,26);
-    prevBookings.push(tempBook);
-
-    tempBook.startDate = new Date(2021,5,27);
-    tempBook.endDate = new Date(2021,5,28);
-    prevBookings.push(tempBook);
+    prevBookings.push(tempBook1);
+    prevBookings.push(tempBook2);
 
     expect(service.checkCrossings4DatesPeriod(newBooking,prevBookings)).toBeTruthy();
-    // console.log(newBooking)
-    // console.log(prevBookings)
   })
 
-  // it('should be getcookie', () => {
-  //
-  //   const spy = jest.spyOn(service,'getCookie').mockReturnValue(undefined);
-  //
-  //   let test = service.getCookie('pin');
-  //   expect(spy).toHaveBeenCalled();
-  //   // expect(test).toBeTruthy();
-  // })
-  // it ('should became on 1 more', () => {
-  //   let de = service.getActivePin();
-  // })
-
-  it('should return activePin',()=> {
-    service.activePin = {
+  it('should return active pin object has been chosen by user on map',()=> {
+    let activePin:Pin = {
       id:0,
       y:100,
       x:100,
@@ -81,8 +68,11 @@ describe('test-actions-service', () => {
       desc:'Тестовая среда',
       booked:[]
     }
-     let activePin:Pin = service.getActivePin()
-    expect(service.activePin).toBe(activePin);
+
+    service.setActivePin(activePin);
+    let newPin:Pin = service.getActivePin();
+
+    expect(service.activePin).toBe(newPin);
   })
 
 })

@@ -13,9 +13,7 @@ export class PinsComponent {
   styleActivePinColor: string='';
 
   constructor(private TestActionsService: TestActionsService) {
-    // if (this.inputPin == undefined) {
-    //   console.log("constructor - undefined")
-    // }
+
   }
 
   ngOnInit() {

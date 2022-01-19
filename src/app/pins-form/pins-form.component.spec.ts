@@ -42,7 +42,6 @@ describe('PinsForm', () => {
       desc:'Тестовая среда',
       booked:[]
     }
-
     component.activePin = service.activePin;
     const el = component.form.get('startDate');
     el?.setValue(new Date(2023,1,1));
@@ -50,15 +49,7 @@ describe('PinsForm', () => {
     el2?.setValue(new Date(2023,1,2));
 
     component.submit();
-    // fixture.detectChanges();
 
     expect(service.houses[component.activePin.id].booked[0].startDate).toEqual(new Date(2023,1,1));
   })
-
-
-
-
-
-
-
 })

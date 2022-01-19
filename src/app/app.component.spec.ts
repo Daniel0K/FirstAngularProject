@@ -40,7 +40,7 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should set active pin by value',()=> {
+  it('should set active pin on click ',()=> {
       let testPin:Pin = {} as Pin;
       testPin = {
           id:0,
@@ -60,7 +60,8 @@ describe('AppComponent', () => {
       {clientX: 50, clientY: 150, buttons: 1})
     component.onClickMap(e);
     expect(service.activeX).toBe(50);
-    expect(service.activeY).toBe(141);
+    expect(service.activeY).toBe(140);
+
   })
 
   it('should push new pins to service houses',()=> {
