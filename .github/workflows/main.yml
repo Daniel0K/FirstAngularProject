@@ -54,8 +54,40 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/angular:test_latests
+  build:
+    if: github.event.pull_request.merged == 'true'
+    runs-on: ubuntu-latest
+    steps:
+          - uses: actions/checkout@v2
 
-#      - name: test
-#        run: |
-#          sudo docker pull daniel0k/angular:v_0.0.1
-#          docker images
+          - name: Use Node.js
+            uses: actions/setup-node@v2
+
+          - name: Install Dependencies
+            run: |
+              npm ci
+
+          - name: Tests
+            run: |
+              npm test
+
+          - name: Build
+            run: |
+              npm run build
+
+          - name: Login to Docker Hub
+            uses: docker/login-action@v1
+            with:
+              username: ${{ secrets.DOCKER_HUB_USERNAME }}
+              password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+          - name: Set up Docker Buildx
+            uses: docker/setup-buildx-action@v1
+
+          - name: Build and push
+            uses: docker/build-push-action@v2
+            with:
+              context: .
+              file: ./Dockerfile
+              push: true
+              tags: ${{ secrets.DOCKER_HUB_USERNAME }}/angular:prod_latests
