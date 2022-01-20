@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, DoCheck, Input, OnInit} from '@angular/core';
 import {bookings, Pin, TestActionsService} from "../services/test-actions.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
@@ -7,7 +7,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   templateUrl: './pins-form.component.html',
   styleUrls: ['./pins-form.component.scss']
 })
-export class PinsFormComponent {
+export class PinsFormComponent implements DoCheck {
   @Input() housesData!: Pin
   activePin:Pin = {} as Pin;
   submittedBooking:bookings={} as bookings;

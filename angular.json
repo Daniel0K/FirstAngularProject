@@ -88,11 +88,22 @@
         },
         "test": {
           "builder": "@angular-builders/jest:run",
+          "options": {}
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
           "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }
     }
   },
-  "defaultProject": "angular-basics"
+  "defaultProject": "angular-basics",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

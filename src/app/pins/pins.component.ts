@@ -6,7 +6,7 @@ import {Pin, TestActionsService} from "../services/test-actions.service";
   templateUrl: './pins.component.html',
   styleUrls: ['./pins.component.scss']
 })
-export class PinsComponent {
+export class PinsComponent implements OnInit {
   @Input() inputPin!: Pin
 
   styleCord: string = ""

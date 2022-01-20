@@ -7,7 +7,7 @@ import {TestActionsService, Pin} from "../services/test-actions.service";
   templateUrl: './add-house-form.component.html',
   styleUrls: ['./add-house-form.component.scss']
 })
-export class AddHouseFormComponent implements OnInit {
+export class AddHouseFormComponent {
 
   form:FormGroup;
   newHousePin:Pin = {} as Pin;
@@ -20,8 +20,6 @@ export class AddHouseFormComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-  }
 
   submit() {
     this.newHousePin = {id:this.TestActionsService.houses.length, x:this.TestActionsService.activeY, y:this.TestActionsService.activeX,name:this.form.value['country'],address:this.form.value['street'],desc:this.form.value['desc'],booked:[]}
