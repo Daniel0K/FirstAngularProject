@@ -34,6 +34,7 @@ export class AppComponent {
       );
       for (let i = 0; i < this.cookiesTest.length; i++) {
         this.TestActionsService.houses.push(this.cookiesTest[i]);
+
       }
     }
   }
