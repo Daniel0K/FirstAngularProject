@@ -54,3 +54,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/angular:v_0.0.1
+
+      - name: test
+        run: |
+          sudo docker pull daniel0k/angular:v_0.0.1
+          docker images
