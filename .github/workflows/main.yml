@@ -54,6 +54,3 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/angular:v_0.0.1
-      - name: test
-        run: |
-          docker images
