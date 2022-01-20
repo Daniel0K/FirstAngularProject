@@ -10,11 +10,6 @@
     "lint": "ng lint",
     "prepare": "husky install"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
-  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~13.1.0",
