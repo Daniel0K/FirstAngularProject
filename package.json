@@ -8,7 +8,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test --coverage",
     "lint": "ng lint",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "prettier": "prettier --write src/**/*.{js,ts,css}",
+    "pre-commit": "lint-staged"
   },
   "private": true,
   "dependencies": {
@@ -43,13 +45,14 @@
     "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.4",
     "jasmine-core": "~3.10.0",
     "jest": "^27.4.7",
+    "lint-staged": "^12.2.1",
     "prettier": "^2.5.1",
     "ts-jest": "^27.1.3",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.3.0",
-    "typescript": "~4.5.2",
-    "husky": "^7.0.0"
+    "typescript": "~4.5.2"
   }
 }

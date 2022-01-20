@@ -1,6 +1,6 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {PinsComponent} from './pins.component';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { PinsComponent } from './pins.component';
 
 @NgModule({
   declarations: [PinsComponent],
@@ -8,5 +8,4 @@ import {PinsComponent} from './pins.component';
   exports: [PinsComponent],
   providers: [],
 })
-export class PinsModule {
-}
+export class PinsModule {}
