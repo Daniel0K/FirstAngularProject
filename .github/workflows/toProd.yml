@@ -20,6 +20,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
           script: |
-            sudo docker kill $(docker ps -q)
             sudo docker pull daniel0k/angular:prod_latests
-            sudo docker run -d -p 81:80 daniel0k/angular:prod_latests
+            docker stop prod_latest_container
+            docker rm prod_latest_container
+            sudo docker run --name=prod_latest_container -d -p 81:80 daniel0k/angular:prod_latests
