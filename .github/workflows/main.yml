@@ -39,7 +39,7 @@ jobs:
           npm run build -- --prod
 
       - name: Jest Coverage by covbot
-        uses: artiomtr/jest-coverage-report-action@v2
+        uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -73,7 +73,7 @@ jobs:
             docker rm test_latest_container
             sudo docker run --name=test_latest_container -d -p 82:80 daniel0k/angular:test_latests
   build:
-    #if: github.event.pull_request.merged == 'true'
+    if: github.event.pull_request.merged == 'true'
     runs-on: ubuntu-latest
     steps:
           - uses: actions/checkout@v2
