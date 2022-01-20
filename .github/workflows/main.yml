@@ -53,7 +53,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/angular:v_0.0.1
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/angular:test_latests
 
 #      - name: test
 #        run: |
