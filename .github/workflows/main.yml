@@ -41,7 +41,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/BookingProject:0.1.0
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/bookingproject:0.1.0
 
       - name: Deploy to Test Server
         uses: appleboy/ssh-action@master
@@ -51,7 +51,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
           script: |
-            sudo docker pull daniel0k/BookingProject:0.1.0
+            sudo docker pull daniel0k/bookingproject:0.1.0
             docker stop test_latest_container
             docker rm test_latest_container
-            sudo docker run --name=test_latest_container -d -p 82:80 daniel0k/BookingProject:0.1.0
+            sudo docker run --name=test_latest_container -d -p 82:80 daniel0k/bookingproject:0.1.0
