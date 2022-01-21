@@ -1,5 +1,7 @@
 name: CI_BuildArtifact
 on:
+  push:
+    branches: [ master ]
   pull_request:
     branches: [ master ]
   workflow_dispatch:
@@ -39,7 +41,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/angular:test_latests
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/angular:BookingProjectStaging
 
       - name: Deploy to Test Server
         uses: appleboy/ssh-action@master
@@ -49,44 +51,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
           script: |
-            sudo docker pull daniel0k/angular:test_latests
+            sudo docker pull daniel0k/angular:BookingProjectStaging
             docker stop test_latest_container
             docker rm test_latest_container
-            sudo docker run --name=test_latest_container -d -p 82:80 daniel0k/angular:test_latests
-  build:
-    if: github.event.pull_request.merged == 'true'
-    runs-on: ubuntu-latest
-    steps:
-          - uses: actions/checkout@v2
-
-          - name: Use Node.js
-            uses: actions/setup-node@v2
-
-          - name: Install Dependencies
-            run: |
-              npm ci
-
-          - name: Tests
-            run: |
-              npm test
-
-          - name: Build
-            run: |
-              npm run build
-
-          - name: Login to Docker Hub
-            uses: docker/login-action@v1
-            with:
-              username: ${{ secrets.DOCKER_HUB_USERNAME }}
-              password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
-          - name: Set up Docker Buildx
-            uses: docker/setup-buildx-action@v1
-
-          - name: Build and push
-            uses: docker/build-push-action@v2
-            with:
-              context: .
-              file: ./Dockerfile
-              push: true
-              tags: ${{ secrets.DOCKER_HUB_USERNAME }}/angular:prod_latests
+            sudo docker run --name=test_latest_container -d -p 82:80 daniel0k/angular:BookingProjectStaging
