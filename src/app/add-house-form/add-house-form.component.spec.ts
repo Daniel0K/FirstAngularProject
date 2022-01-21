@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AddHouseFormComponent } from './add-house-form.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TestActionsService } from '../services/test-actions.service';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {AddHouseFormComponent} from './add-house-form.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {TestActionsService} from '../services/test-actions.service';
 
 describe('AddHouseForm', () => {
   let component: AddHouseFormComponent;
@@ -13,7 +13,7 @@ describe('AddHouseForm', () => {
       providers: [
         ReactiveFormsModule,
         FormsModule,
-        { provide: TestActionsService },
+        {provide: TestActionsService},
       ],
     });
     fixture = TestBed.createComponent(AddHouseFormComponent);
@@ -81,9 +81,8 @@ describe('AddHouseForm', () => {
     el3?.setValue('ТестТест3');
 
     component.submit();
+    let lastEl = service.houses.pop();
 
-    expect(service.houses[service.houses.length - 1]).toBe(
-      component.newHousePin
-    );
+    expect(lastEl).toBe(component.newHousePin);
   });
 });
