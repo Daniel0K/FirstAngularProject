@@ -18,8 +18,7 @@ export class AppComponent {
     this.currentHouses = TestActionsService.getCurrentHouses();
     this.activePin = TestActionsService.activePin;
     TestActionsService.setActivePin(TestActionsService.houses[0]);
-    if (document.cookie === '') {
-      return;
+    if (document.cookie == '') {
     } else {
       this.checkPinCookies();
       this.checkUpdatedPinCookies();
@@ -40,7 +39,9 @@ export class AppComponent {
   }
 
   checkUpdatedPinCookies() {
-    if (this.TestActionsService.getCookie('updatedPins') === undefined) {
+    if (
+      JSON.parse(this.TestActionsService.getCookie('updatedPins') || '') === ''
+    ) {
       return;
     } else {
       this.cookiesTest = <Pin[]>(

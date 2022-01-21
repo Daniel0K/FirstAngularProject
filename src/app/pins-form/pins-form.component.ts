@@ -40,7 +40,6 @@ export class PinsFormComponent implements DoCheck {
         this.TestActionsService.houses[this.activePin.id].booked
       )
     ) {
-      return;
     } else {
       this.TestActionsService.addBookingToHouseById(
         this.activePin.id,

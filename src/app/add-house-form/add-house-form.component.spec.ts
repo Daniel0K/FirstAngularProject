@@ -69,8 +69,8 @@ describe('AddHouseForm', () => {
   });
 
   it('should check data from form and setting their to main houses array when send button was pressed (submit)', () => {
-    const activeX: number = 100;
-    const activeY: number = 200;
+    let activeX: number = 100;
+    let activeY: number = 200;
     service.activeX = activeX;
     service.activeY = activeY;
     const el = component.form.get('country');

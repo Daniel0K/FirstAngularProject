@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
 
-export interface bookings {
-  startDate: Date;
-  endDate: Date;
-}
-
 export interface Pin {
   id: number;
   x: number;
@@ -15,10 +10,17 @@ export interface Pin {
   booked: bookings[];
 }
 
+export interface bookings {
+  startDate: Date;
+  endDate: Date;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class TestActionsService {
+  constructor() {}
+
   houses: Pin[] = [
     {
       id: 0,
