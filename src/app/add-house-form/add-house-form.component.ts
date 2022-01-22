@@ -30,9 +30,9 @@ export class AddHouseFormComponent {
       id: this.TestActionsService.houses.length,
       x: this.TestActionsService.activeY,
       y: this.TestActionsService.activeX,
-      name: this.form.value['country'],
-      address: this.form.value['street'],
-      desc: this.form.value['desc'],
+      name: this.form.value.country,
+      address: this.form.value.street,
+      desc: this.form.value.desc,
       booked: [],
     };
     this.TestActionsService.addPin(this.newHousePin);

@@ -2,7 +2,7 @@ import { bookings, Pin, TestActionsService } from './test-actions.service';
 
 describe('test-actions-service', () => {
   let service: TestActionsService;
-  let fakePin = {
+  const fakePin = {
     id: 0,
     y: 100,
     x: 100,
@@ -16,7 +16,7 @@ describe('test-actions-service', () => {
   });
 
   it('should increase houses to one more', () => {
-    let defaultLength: number = service.houses.length;
+    const defaultLength: number = service.houses.length;
 
     service.addPin(fakePin);
 
@@ -24,10 +24,10 @@ describe('test-actions-service', () => {
   });
 
   it('should check bookings date for crossings. It will be return false because no crossing', () => {
-    let newBooking = {} as bookings;
-    let prevBookings = [];
-    let tempBook1 = {} as bookings;
-    let tempBook2 = {} as bookings;
+    const newBooking = {} as bookings;
+    const prevBookings = [];
+    const tempBook1 = {} as bookings;
+    const tempBook2 = {} as bookings;
     newBooking.startDate = new Date(2021, 5, 21);
     newBooking.endDate = new Date(2021, 5, 22);
     tempBook1.startDate = new Date(2021, 5, 25);
@@ -44,10 +44,10 @@ describe('test-actions-service', () => {
   });
 
   it('should check bookings date for crossings. It will be return true because crossing exist', () => {
-    let newBooking = {} as bookings;
-    let prevBookings = [];
-    let tempBook1 = {} as bookings;
-    let tempBook2 = {} as bookings;
+    const newBooking = {} as bookings;
+    const prevBookings = [];
+    const tempBook1 = {} as bookings;
+    const tempBook2 = {} as bookings;
     newBooking.startDate = new Date(2021, 5, 20);
     newBooking.endDate = new Date(2021, 5, 28);
     tempBook1.startDate = new Date(2021, 5, 25);
@@ -64,7 +64,7 @@ describe('test-actions-service', () => {
   });
 
   it('should return active pin object has been chosen by user on map', () => {
-    let activePin: Pin = {
+    const activePin: Pin = {
       id: 0,
       y: 100,
       x: 100,
@@ -75,7 +75,7 @@ describe('test-actions-service', () => {
     };
 
     service.setActivePin(activePin);
-    let newPin: Pin = service.getActivePin();
+    const newPin: Pin = service.getActivePin();
 
     expect(service.activePin).toBe(newPin);
   });

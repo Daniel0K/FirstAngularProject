@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
 
+export interface bookings {
+  startDate: Date;
+  endDate: Date;
+}
+
 export interface Pin {
   id: number;
   x: number;
@@ -10,16 +15,10 @@ export interface Pin {
   booked: bookings[];
 }
 
-export interface bookings {
-  startDate: Date;
-  endDate: Date;
-}
-
 @Injectable({
   providedIn: 'root',
 })
 export class TestActionsService {
-  constructor() {}
 
   houses: Pin[] = [
     {
@@ -77,6 +76,7 @@ export class TestActionsService {
       booked: [],
     },
   ];
+
   activePin: Pin = {} as Pin;
   activeX: number = 999;
   activeY: number = 999;
@@ -106,10 +106,10 @@ export class TestActionsService {
   }
 
   getCookie(name: string) {
-    let matches = document.cookie.match(
+    const matches = document.cookie.match(
       new RegExp(
         '(?:^|; )' +
-          name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') +
+          name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + //eslint-disable-line
           '=([^;]*)'
       )
     );
@@ -117,7 +117,7 @@ export class TestActionsService {
   }
 
   setCookie(name: string, value: string) {
-    let updatedCookie: string = `${name}=${value}`;
+    const updatedCookie: string = `${name}=${value}`;
     document.cookie = updatedCookie;
   }
 

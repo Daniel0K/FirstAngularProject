@@ -69,8 +69,8 @@ describe('AddHouseForm', () => {
   });
 
   it('should check data from form and setting their to main houses array when send button was pressed (submit)', () => {
-    let activeX: number = 100;
-    let activeY: number = 200;
+    const activeX: number = 100;
+    const activeY: number = 200;
     service.activeX = activeX;
     service.activeY = activeY;
     const el = component.form.get('country');
@@ -81,7 +81,7 @@ describe('AddHouseForm', () => {
     el3?.setValue('ТестТест3');
 
     component.submit();
-    let lastEl = service.houses.pop();
+    const lastEl = service.houses.pop();
 
     expect(lastEl).toBe(component.newHousePin);
   });
