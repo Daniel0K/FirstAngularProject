@@ -57,7 +57,7 @@ describe('AppComponent', () => {
   });
 
   it('should set active pin by value', () => {
-    let e: MouseEvent = new MouseEvent('mousemove', {
+    const e: MouseEvent = new MouseEvent('mousemove', {
       clientX: 50,
       clientY: 150,
       buttons: 1,

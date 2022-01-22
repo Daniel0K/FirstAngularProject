@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Pin, TestActionsService } from '../services/test-actions.service';
+import { Pin } from '../services/test-actions.service';
 
 @Component({
   selector: 'app-pins',
@@ -11,8 +11,6 @@ export class PinsComponent implements OnInit {
 
   styleCord: string = '';
   styleActivePinColor: string = '';
-
-  constructor(private TestActionsService: TestActionsService) {}
 
   ngOnInit() {
     this.changeStylePosition(this.inputPin.x, this.inputPin.y);

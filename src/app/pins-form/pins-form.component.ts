@@ -31,16 +31,15 @@ export class PinsFormComponent implements DoCheck {
 
   submit() {
     this.submittedBooking = {
-      startDate: this.form.value['startDate'],
-      endDate: this.form.value['endDate'],
+      startDate: this.form.value.startDate,
+      endDate: this.form.value.endDate,
     };
     if (
-      this.TestActionsService.checkCrossings4DatesPeriod(
+      !this.TestActionsService.checkCrossings4DatesPeriod(
         this.TestActionsService.submittedBooking,
         this.TestActionsService.houses[this.activePin.id].booked
       )
     ) {
-    } else {
       this.TestActionsService.addBookingToHouseById(
         this.activePin.id,
         this.submittedBooking
