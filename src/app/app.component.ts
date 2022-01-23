@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Pin, TestActionsService } from './services/test-actions.service';
+import {Component} from '@angular/core';
+import {Pin, TestActionsService} from './services/test-actions.service';
 
 @Component({
   selector: 'app-root',
@@ -24,28 +24,29 @@ export class AppComponent {
     }
   }
 
+  hasCookie(value: string): boolean {
+    return this.TestActionsService.getCookie(value) !== undefined;
+  }
+
   checkPinCookies() {
-    if (!(this.TestActionsService.getCookie('pin') || '') === undefined) {
+    if (this.hasCookie('pin')) {
       this.cookiesTest = <Pin[]>(
         JSON.parse(this.TestActionsService.getCookie('pin') || '')
       );
-      for (let i = 0; i < this.cookiesTest.length; i++) {
-        this.TestActionsService.houses.push(this.cookiesTest[i]);
-      }
+      this.cookiesTest.forEach((item) => {
+        this.TestActionsService.houses.push(item);
+      });
     }
   }
 
   checkUpdatedPinCookies() {
-    if (
-      !(this.TestActionsService.getCookie('updatedPins') || '') === undefined
-    ) {
+    if (this.hasCookie('updatedPins')) {
       this.cookiesTest = <Pin[]>(
         JSON.parse(this.TestActionsService.getCookie('updatedPins') || '')
       );
-      for (let i = 0; i < this.cookiesTest.length; i++) {
-        this.TestActionsService.houses[this.cookiesTest[i].id] =
-          this.cookiesTest[i];
-      }
+      this.cookiesTest.forEach((item) => {
+        this.TestActionsService.houses[item.id] = item;
+      });
     }
   }
 
