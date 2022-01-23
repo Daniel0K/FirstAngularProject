@@ -1,24 +1,24 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {AddHouseFormComponent} from './add-house-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {TestActionsService} from '../services/test-actions.service';
+import {PinsService} from '../services/pins.service';
 
 describe('AddHouseForm', () => {
   let component: AddHouseFormComponent;
   let fixture: ComponentFixture<AddHouseFormComponent>;
-  let service: TestActionsService;
+  let service: PinsService;
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AddHouseFormComponent],
       providers: [
         ReactiveFormsModule,
         FormsModule,
-        {provide: TestActionsService},
+        {provide: PinsService},
       ],
     });
     fixture = TestBed.createComponent(AddHouseFormComponent);
     component = fixture.componentInstance;
-    service = fixture.debugElement.injector.get(TestActionsService);
+    service = fixture.debugElement.injector.get(PinsService);
   });
 
   it('should be true if control country on form was typed and have more or eq 6 letters', () => {

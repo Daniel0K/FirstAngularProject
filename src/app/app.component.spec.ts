@@ -1,14 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { Pin, TestActionsService } from './services/test-actions.service';
+import { PinsService } from './services/pins.service';
 import { AddHouseFormComponent } from './add-house-form/add-house-form.component';
 import { PinsComponent } from './pins/pins.component';
 import { PinsFormComponent } from './pins-form/pins-form.component';
+import { pin } from './models/pin-model';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
-  let service: TestActionsService;
+  let service: PinsService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -18,11 +19,11 @@ describe('AppComponent', () => {
         AddHouseFormComponent,
         PinsFormComponent,
       ],
-      providers: [{ provide: TestActionsService }],
+      providers: [{ provide: PinsService }],
     }).compileComponents();
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
-    service = fixture.debugElement.injector.get(TestActionsService);
+    service = fixture.debugElement.injector.get(PinsService);
     deleteAllCookies();
   });
 
@@ -30,7 +31,7 @@ describe('AppComponent', () => {
     const cookies = document.cookie.split(';');
     for (const cookie of cookies) {
       const eqPos = cookie.indexOf('=');
-      const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
       document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
     }
   };
@@ -42,8 +43,7 @@ describe('AppComponent', () => {
   });
 
   it('should set active pin on click ', () => {
-    let testPin: Pin = {} as Pin;
-    testPin = {
+    const testPin: pin = {
       id: 0,
       y: 100,
       x: 100,

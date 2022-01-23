@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Pin, TestActionsService } from '../services/test-actions.service';
+import { PinsService } from '../services/pins.service';
+import {pin} from "../models/pin-model";
 
 @Component({
   selector: 'app-add-house-form',
@@ -9,9 +10,9 @@ import { Pin, TestActionsService } from '../services/test-actions.service';
 })
 export class AddHouseFormComponent {
   form: FormGroup;
-  newHousePin: Pin = {} as Pin;
+  newHousePin: pin = {} as pin;
 
-  constructor(private TestActionsService: TestActionsService) {
+  constructor(private pinsService: PinsService) {
     this.form = new FormGroup({
       country: new FormControl('', [
         Validators.minLength(6),
@@ -27,15 +28,15 @@ export class AddHouseFormComponent {
 
   submit() {
     this.newHousePin = {
-      id: this.TestActionsService.houses.length,
-      x: this.TestActionsService.activeY,
-      y: this.TestActionsService.activeX,
+      id: this.pinsService.houses.length,
+      x: this.pinsService.activeY,
+      y: this.pinsService.activeX,
       name: this.form.value.country,
       address: this.form.value.street,
       desc: this.form.value.desc,
       booked: [],
     };
-    this.TestActionsService.addPin(this.newHousePin);
-    this.TestActionsService.setActivePin(this.newHousePin);
+    this.pinsService.addPin(this.newHousePin);
+    this.pinsService.setActivePin(this.newHousePin);
   }
 }

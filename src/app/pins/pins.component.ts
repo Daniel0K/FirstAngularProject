@@ -1,13 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Pin } from '../services/test-actions.service';
-
+import { pin } from '../models/pin-model'
 @Component({
   selector: 'app-pins',
   templateUrl: './pins.component.html',
   styleUrls: ['./pins.component.scss'],
 })
 export class PinsComponent implements OnInit {
-  @Input() inputPin!: Pin;
+  @Input() inputPin!: pin;
 
   styleCord: string = '';
   styleActivePinColor: string = '';

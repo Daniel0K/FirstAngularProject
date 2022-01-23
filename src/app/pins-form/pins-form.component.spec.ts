@@ -1,24 +1,24 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PinsFormComponent } from './pins-form.component';
-import { TestActionsService } from '../services/test-actions.service';
+import { PinsService } from '../services/pins.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('PinsForm', () => {
   let component: PinsFormComponent;
   let fixture: ComponentFixture<PinsFormComponent>;
-  let service: TestActionsService;
+  let service: PinsService;
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PinsFormComponent],
       providers: [
         ReactiveFormsModule,
         FormsModule,
-        { provide: TestActionsService },
+        { provide: PinsService },
       ],
     });
     fixture = TestBed.createComponent(PinsFormComponent);
     component = fixture.componentInstance;
-    service = fixture.debugElement.injector.get(TestActionsService);
+    service = fixture.debugElement.injector.get(PinsService);
   });
 
   it('should be true if startDate picked', () => {

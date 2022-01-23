@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
-import {Pin, TestActionsService} from './services/test-actions.service';
+import {PinsService} from './services/pins.service';
+import {pin} from "./models/pin-model";
+import {CookiesService} from "./services/cookies.sevice";
 
 @Component({
   selector: 'app-root',
@@ -10,54 +12,49 @@ export class AppComponent {
   title = 'angular-basics';
   xClicked: number = 0;
   yClicked: number = 0;
-  cookiesTest: Pin[] = [];
-  currentHouses: Pin[] = [];
-  activePin: Pin = {} as Pin;
+  cookiesTest: pin[] = [];
+  currentHouses: pin[] = [];
+  activePin: pin = {} as pin;
 
-  constructor(private TestActionsService: TestActionsService) {
-    this.currentHouses = TestActionsService.getCurrentHouses();
-    this.activePin = TestActionsService.activePin;
-    TestActionsService.setActivePin(TestActionsService.houses[0]);
-    if (document.cookie !== '') {
-      this.checkPinCookies();
-      this.checkUpdatedPinCookies();
-    }
-  }
-
-  hasCookie(value: string): boolean {
-    return this.TestActionsService.getCookie(value) !== undefined;
+  constructor(private pinsService: PinsService, private cookiesService: CookiesService) {
+    this.currentHouses = pinsService.getCurrentHouses();
+    this.activePin = pinsService.activePin;
+    pinsService.setActivePin(pinsService.houses[0]);
+    this.checkPinCookies();
+    this.checkUpdatedPinCookies();
   }
 
   checkPinCookies() {
-    if (this.hasCookie('pin')) {
-      this.cookiesTest = <Pin[]>(
-        JSON.parse(this.TestActionsService.getCookie('pin') || '')
+    if (this.cookiesService.hasCookie('pin')) {
+      this.cookiesTest = <pin[]>(
+        JSON.parse(this.cookiesService.getCookie('pin') || '')
       );
-      this.cookiesTest.forEach((item) => {
-        this.TestActionsService.houses.push(item);
-      });
+      this.pinsService.houses = this.pinsService.houses.concat(this.cookiesTest);
     }
   }
 
   checkUpdatedPinCookies() {
-    if (this.hasCookie('updatedPins')) {
-      this.cookiesTest = <Pin[]>(
-        JSON.parse(this.TestActionsService.getCookie('updatedPins') || '')
+    if (this.cookiesService.hasCookie('updatedPins')) {
+      this.cookiesTest = <pin[]>(
+        JSON.parse(this.cookiesService.getCookie('updatedPins') || '')
       );
       this.cookiesTest.forEach((item) => {
-        this.TestActionsService.houses[item.id] = item;
+        this.pinsService.houses[item.id] = item;
+
+        this.pinsService.houses[this.pinsService.houses.findIndex(el => el.id === item.id)] =item;
+
       });
     }
   }
 
-  onClickPin(p: Pin) {
-    this.TestActionsService.setActivePin(p);
+  onClickPin(p: pin) {
+    this.pinsService.setActivePin(p);
   }
 
   onClickMap(e: MouseEvent) {
-    this.TestActionsService.activeX = e.clientX;
+    this.pinsService.activeX = e.clientX;
     this.xClicked = e.clientX;
-    this.TestActionsService.activeY = e.clientY - 10;
+    this.pinsService.activeY = e.clientY - 10;
     this.yClicked = e.clientY - 10;
   }
 }

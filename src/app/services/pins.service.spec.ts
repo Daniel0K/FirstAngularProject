@@ -1,7 +1,11 @@
-import { bookings, Pin, TestActionsService } from './test-actions.service';
+import {PinsService} from './pins.service';
+import {pin} from '../models/pin-model'
+import {bookings} from '../models/bookings-model'
+import {BookingService} from "./booking.service";
 
 describe('test-actions-service', () => {
-  let service: TestActionsService;
+  let mainService: PinsService;
+  let bookingService: BookingService;
   const fakePin = {
     id: 0,
     y: 100,
@@ -12,15 +16,16 @@ describe('test-actions-service', () => {
     booked: [],
   };
   beforeEach(() => {
-    service = new TestActionsService();
+    mainService = new PinsService();
+    bookingService = new BookingService(mainService);
   });
 
   it('should increase houses to one more', () => {
-    const defaultLength: number = service.houses.length;
+    const defaultLength: number = mainService.houses.length;
 
-    service.addPin(fakePin);
+    mainService.addPin(fakePin);
 
-    expect(service.houses.length).toBe(defaultLength + 1);
+    expect(mainService.houses.length).toBe(defaultLength + 1);
   });
 
   it('should check bookings date for crossings. It will be return false because no crossing', () => {
@@ -39,7 +44,7 @@ describe('test-actions-service', () => {
     prevBookings.push(tempBook2);
 
     expect(
-      service.checkCrossings4DatesPeriod(newBooking, prevBookings)
+      bookingService.isBookingExists(newBooking, prevBookings)
     ).toBeFalsy();
   });
 
@@ -59,12 +64,12 @@ describe('test-actions-service', () => {
     prevBookings.push(tempBook2);
 
     expect(
-      service.checkCrossings4DatesPeriod(newBooking, prevBookings)
+      bookingService.isBookingExists(newBooking, prevBookings)
     ).toBeTruthy();
   });
 
   it('should return active pin object has been chosen by user on map', () => {
-    const activePin: Pin = {
+    const activePin: pin = {
       id: 0,
       y: 100,
       x: 100,
@@ -74,9 +79,9 @@ describe('test-actions-service', () => {
       booked: [],
     };
 
-    service.setActivePin(activePin);
-    const newPin: Pin = service.getActivePin();
+    mainService.setActivePin(activePin);
+    const newPin: pin = mainService.getActivePin();
 
-    expect(service.activePin).toBe(newPin);
+    expect(mainService.activePin).toBe(newPin);
   });
 });

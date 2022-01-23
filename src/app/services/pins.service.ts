@@ -1,26 +1,13 @@
 import { Injectable } from '@angular/core';
-
-export interface bookings {
-  startDate: Date;
-  endDate: Date;
-}
-
-export interface Pin {
-  id: number;
-  x: number;
-  y: number;
-  name: string;
-  address: string;
-  desc: string;
-  booked: bookings[];
-}
+import {pin} from "../models/pin-model";
+import {bookings} from "../models/bookings-model";
 
 @Injectable({
   providedIn: 'root',
 })
-export class TestActionsService {
+export class PinsService {
 
-  houses: Pin[] = [
+  houses: pin[] = [
     {
       id: 0,
       y: 885,
@@ -77,64 +64,27 @@ export class TestActionsService {
     },
   ];
 
-  activePin: Pin = {} as Pin;
+  activePin: pin = {} as pin;
   activeX: number = 999;
   activeY: number = 999;
-  additionalHousesCookies: Pin[] = [];
+  additionalHousesCookies: pin[] = [];
   submittedBooking: bookings = {} as bookings;
 
-  getCurrentHouses(): Pin[] {
+  getCurrentHouses(): pin[] {
     return this.houses;
   }
 
-  addBookingToHouseById(id: number, submittedBooking: bookings) {
-    this.houses[id].booked.push(submittedBooking);
-  }
-
-  getActivePin(): Pin {
+  getActivePin(): pin {
     return this.activePin;
   }
 
-  setActivePin(p: Pin) {
+  setActivePin(p: pin) {
     this.activePin = p;
   }
 
-  addPin(p: Pin) {
+  addPin(p: pin) {
     this.houses.push(p);
     this.additionalHousesCookies.push(p);
     document.cookie = `pin=${JSON.stringify(this.additionalHousesCookies)}`;
-  }
-
-  getCookie(name: string) {
-    const matches = document.cookie.match(
-      new RegExp(
-        '(?:^|; )' +
-          name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + //eslint-disable-line
-          '=([^;]*)'
-      )
-    );
-    return matches ? decodeURIComponent(matches[1]) : undefined;
-  }
-
-  setCookie(name: string, value: string) {
-    const updatedCookie: string = `${name}=${value}`;
-    document.cookie = updatedCookie;
-  }
-
-  checkCrossings4DatesPeriod(
-    currentBooking: bookings,
-    existBookings: bookings[]
-  ): boolean {
-    for (let i = 0; i < existBookings.length; i++) {
-      if (
-        currentBooking.startDate <= existBookings[i].endDate &&
-        existBookings[i].startDate <= currentBooking.endDate
-      ) {
-        return true;
-      } else {
-        continue;
-      }
-    }
-    return false;
   }
 }
