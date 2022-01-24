@@ -1,4 +1,9 @@
 #!/bin/sh
+printenv
+echo "node=$(which node)"
+echo "npm=$(which npm)"
+echo "npx=$(which npx)"
+HUSKY_DEBUG=1
 . "$(dirname "$0")/_/husky.sh"
 
 npm run pre-commit
