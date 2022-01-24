@@ -10,7 +10,8 @@ import {CookiesService} from "./services/cookies.sevice";
 })
 export class AppComponent {
   title = 'angular-basics';
-  xClicked: number = 1;
+  xClicked: number = 0;
+
   yClicked: number = 0;
   parsedCookie: Pin[] = [];
   currentHouses: Pin[] = [];
