@@ -1,4 +1,4 @@
-import {bookings} from "./bookings";
+import {Bookings} from "./bookings";
 
 export interface Pin {
   id: number;
@@ -7,5 +7,5 @@ export interface Pin {
   name: string;
   address: string;
   desc: string;
-  booked: bookings[];
+  booked: Bookings[];
 }
