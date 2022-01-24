@@ -1,6 +1,6 @@
 import {PinsService} from './pins.service';
-import {pin} from '../models/pin'
-import {bookings} from '../models/bookings'
+import {Pin} from '../models/pin'
+import {Bookings} from '../models/bookings'
 import {BookingService} from "./booking.service";
 
 describe('test-actions-service', () => {
@@ -29,10 +29,10 @@ describe('test-actions-service', () => {
   });
 
   it('should check bookings date for crossings. It will be return false because no crossing', () => {
-    const newBooking = {} as bookings;
+    const newBooking = {} as Bookings;
     const prevBookings = [];
-    const tempBook1 = {} as bookings;
-    const tempBook2 = {} as bookings;
+    const tempBook1 = {} as Bookings;
+    const tempBook2 = {} as Bookings;
     newBooking.startDate = new Date(2021, 5, 21);
     newBooking.endDate = new Date(2021, 5, 22);
     tempBook1.startDate = new Date(2021, 5, 25);
@@ -49,10 +49,10 @@ describe('test-actions-service', () => {
   });
 
   it('should check bookings date for crossings. It will be return true because crossing exist', () => {
-    const newBooking = {} as bookings;
+    const newBooking = {} as Bookings;
     const prevBookings = [];
-    const tempBook1 = {} as bookings;
-    const tempBook2 = {} as bookings;
+    const tempBook1 = {} as Bookings;
+    const tempBook2 = {} as Bookings;
     newBooking.startDate = new Date(2021, 5, 20);
     newBooking.endDate = new Date(2021, 5, 28);
     tempBook1.startDate = new Date(2021, 5, 25);
@@ -69,7 +69,7 @@ describe('test-actions-service', () => {
   });
 
   it('should return active pin object has been chosen by user on map', () => {
-    const activePin: pin = {
+    const activePin: Pin = {
       id: 0,
       y: 100,
       x: 100,
@@ -80,7 +80,7 @@ describe('test-actions-service', () => {
     };
 
     mainService.setActivePin(activePin);
-    const newPin: pin = mainService.getActivePin();
+    const newPin: Pin = mainService.getActivePin();
 
     expect(mainService.activePin).toBe(newPin);
   });

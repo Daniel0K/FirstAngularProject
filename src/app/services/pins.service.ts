@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import {pin} from "../models/pin";
-import {bookings} from "../models/bookings";
+import {Pin} from "../models/pin";
+import {Bookings} from "../models/bookings";
 
 @Injectable({
   providedIn: 'root',
 })
 export class PinsService {
 
-  houses: pin[] = [
+  houses: Pin[] = [
     {
       id: 0,
       y: 885,
@@ -64,25 +64,25 @@ export class PinsService {
     },
   ];
 
-  activePin: pin = {} as pin;
+  activePin: Pin = {} as Pin;
   activeX: number = 999;
   activeY: number = 999;
-  additionalHousesCookies: pin[] = [];
-  submittedBooking: bookings = {} as bookings;
+  additionalHousesCookies: Pin[] = [];
+  submittedBooking: Bookings = {} as Bookings;
 
-  getCurrentHouses(): pin[] {
+  getCurrentHouses(): Pin[] {
     return this.houses;
   }
 
-  getActivePin(): pin {
+  getActivePin(): Pin {
     return this.activePin;
   }
 
-  setActivePin(p: pin) {
+  setActivePin(p: Pin) {
     this.activePin = p;
   }
 
-  addPin(p: pin) {
+  addPin(p: Pin) {
     this.houses.push(p);
     this.additionalHousesCookies.push(p);
     document.cookie = `pin=${JSON.stringify(this.additionalHousesCookies)}`;
