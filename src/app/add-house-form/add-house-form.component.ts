@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PinsService } from '../services/pins.service';
-import {pin} from "../models/pin-model";
+import {Pin} from "../models/pin";
 
 @Component({
   selector: 'app-add-house-form',
@@ -10,7 +10,7 @@ import {pin} from "../models/pin-model";
 })
 export class AddHouseFormComponent {
   form: FormGroup;
-  newHousePin: pin = {} as pin;
+  newHousePin: Pin = {} as Pin;
 
   constructor(private pinsService: PinsService) {
     this.form = new FormGroup({

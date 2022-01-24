@@ -1,6 +1,6 @@
 import {PinsService} from './pins.service';
-import {pin} from '../models/pin-model'
-import {bookings} from '../models/bookings-model'
+import {pin} from '../models/pin'
+import {bookings} from '../models/bookings'
 import {BookingService} from "./booking.service";
 
 describe('test-actions-service', () => {

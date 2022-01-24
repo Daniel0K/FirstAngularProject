@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {PinsService} from './services/pins.service';
-import {pin} from "./models/pin-model";
+import {Pin} from "./models/pin";
 import {CookiesService} from "./services/cookies.sevice";
 
 @Component({
@@ -12,33 +12,33 @@ export class AppComponent {
   title = 'angular-basics';
   xClicked: number = 0;
   yClicked: number = 0;
-  cookiesTest: pin[] = [];
-  currentHouses: pin[] = [];
-  activePin: pin = {} as pin;
+  parsedCookie: Pin[] = [];
+  currentHouses: Pin[] = [];
+  activePin: Pin = {} as Pin;
 
   constructor(private pinsService: PinsService, private cookiesService: CookiesService) {
     this.currentHouses = pinsService.getCurrentHouses();
     this.activePin = pinsService.activePin;
     pinsService.setActivePin(pinsService.houses[0]);
-    this.checkPinCookies();
-    this.checkUpdatedPinCookies();
+    this.getPinsByCookieFromMap();
+    this.updateAllPinsByCookieFromMap();
   }
 
-  checkPinCookies() {
+  getPinsByCookieFromMap() {
     if (this.cookiesService.hasCookie('pin')) {
-      this.cookiesTest = <pin[]>(
+      this.parsedCookie = <Pin[]>(
         JSON.parse(this.cookiesService.getCookie('pin') || '')
       );
-      this.pinsService.houses = this.pinsService.houses.concat(this.cookiesTest);
+      this.pinsService.houses = this.pinsService.houses.concat(this.parsedCookie);
     }
   }
 
-  checkUpdatedPinCookies() {
+  updateAllPinsByCookieFromMap() {
     if (this.cookiesService.hasCookie('updatedPins')) {
-      this.cookiesTest = <pin[]>(
+      this.parsedCookie = <Pin[]>(
         JSON.parse(this.cookiesService.getCookie('updatedPins') || '')
       );
-      this.cookiesTest.forEach((item) => {
+      this.parsedCookie.forEach((item) => {
         this.pinsService.houses[item.id] = item;
 
         this.pinsService.houses[this.pinsService.houses.findIndex(el => el.id === item.id)] =item;
@@ -47,7 +47,7 @@ export class AppComponent {
     }
   }
 
-  onClickPin(p: pin) {
+  onClickPin(p: Pin) {
     this.pinsService.setActivePin(p);
   }
 

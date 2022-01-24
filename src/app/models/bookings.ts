@@ -1,4 +1,4 @@
-export interface bookings {
+export interface Bookings {
   startDate: Date;
   endDate: Date;
 }

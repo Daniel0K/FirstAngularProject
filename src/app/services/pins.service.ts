@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {pin} from "../models/pin-model";
-import {bookings} from "../models/bookings-model";
+import {pin} from "../models/pin";
+import {bookings} from "../models/bookings";
 
 @Injectable({
   providedIn: 'root',

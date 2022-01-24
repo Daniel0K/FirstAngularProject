@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { bookings } from '../models/bookings-model';
+import { Bookings } from '../models/bookings';
 import { PinsService } from './pins.service';
 
 
@@ -11,13 +11,13 @@ export class BookingService {
   constructor(private pinsService: PinsService) {
   }
 
-  addBookingToHouseById(id: number, submittedBooking: bookings) {
+  addBookingToHouseById(id: number, submittedBooking: Bookings) {
     this.pinsService.houses[id].booked.push(submittedBooking);
   }
 
   isBookingExists(
-    currentBooking: bookings,
-    existBookings: bookings[]
+    currentBooking: Bookings,
+    existBookings: Bookings[]
   ): boolean {
     for (let i = 0; i < existBookings.length; i++) {
       if (

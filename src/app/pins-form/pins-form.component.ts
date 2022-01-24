@@ -1,8 +1,8 @@
 import { Component, DoCheck, Input } from '@angular/core';
 import {PinsService} from '../services/pins.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import {pin} from "../models/pin-model";
-import {bookings} from "../models/bookings-model";
+import {Pin} from "../models/pin";
+import {Bookings} from "../models/bookings";
 import {BookingService} from '../services/booking.service'
 import {CookiesService} from "../services/cookies.sevice";
 
@@ -13,9 +13,9 @@ import {CookiesService} from "../services/cookies.sevice";
   styleUrls: ['./pins-form.component.scss'],
 })
 export class PinsFormComponent implements DoCheck {
-  @Input() housesData!: pin;
-  activePin: pin = {} as pin;
-  submittedBooking: bookings = {} as bookings;
+  @Input() housesData!: Pin;
+  activePin: Pin = {} as Pin;
+  submittedBooking: Bookings = {} as Bookings;
 
   form: FormGroup;
 

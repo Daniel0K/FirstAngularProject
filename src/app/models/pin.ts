@@ -1,6 +1,6 @@
-import {bookings} from "./bookings-model";
+import {bookings} from "./bookings";
 
-export interface pin {
+export interface Pin {
   id: number;
   x: number;
   y: number;

@@ -4,7 +4,7 @@ import { PinsService } from './services/pins.service';
 import { AddHouseFormComponent } from './add-house-form/add-house-form.component';
 import { PinsComponent } from './pins/pins.component';
 import { PinsFormComponent } from './pins-form/pins-form.component';
-import { pin } from './models/pin-model';
+import { Pin } from './models/pin';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -43,7 +43,7 @@ describe('AppComponent', () => {
   });
 
   it('should set active pin on click ', () => {
-    const testPin: pin = {
+    const testPin: Pin = {
       id: 0,
       y: 100,
       x: 100,
