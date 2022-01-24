@@ -1,5 +1,6 @@
-import { PinsComponent } from '../pins/pins.component';
+import { PinsComponent } from './pins.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import 'zone.js';
 
 describe('Pins', () => {
   let component: PinsComponent;

@@ -7,6 +7,9 @@ module.exports = {
     '!<rootDir>/src/app/**/index.ts',
     '!<rootDir>/src/app/**/*.module.ts'
   ],
+  preset: 'jest-preset-angular',
+  setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
+  globalSetup: 'jest-preset-angular/global-setup',
 
   coverageDirectory: 'coverage',
 

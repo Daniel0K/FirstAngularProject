@@ -2,6 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {AddHouseFormComponent} from './add-house-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {PinsService} from '../services/pins.service';
+import 'zone.js';
 
 describe('AddHouseForm', () => {
   let component: AddHouseFormComponent;

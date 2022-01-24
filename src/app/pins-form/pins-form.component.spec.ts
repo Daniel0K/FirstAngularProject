@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PinsFormComponent } from './pins-form.component';
 import { PinsService } from '../services/pins.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import 'zone.js';
 
 describe('PinsForm', () => {
   let component: PinsFormComponent;
