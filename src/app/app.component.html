@@ -1,11 +1,8 @@
 <app-pins
-  (click)="onClickPin(p)" *ngFor="let p of currentHouses"
+  (click)="onClickPin(p)"
+  *ngFor="let p of currentHouses"
   [inputPin]="p"
 ></app-pins>
-<app-pins-form
-  [housesData]="activePin"
-></app-pins-form>
+<app-pins-form [housesData]="activePin"></app-pins-form>
 <app-add-house-form></app-add-house-form>
 <div (click)="onClickMap($event)" class="map"></div>
-<p class="debugCoords">{{xClicked}} {{yClicked}}</p>
-
