@@ -1,8 +1,12 @@
-import { bookings, Pin, TestActionsService } from './test-actions.service';
+import {PinsService} from './pins.service';
+import {Pin} from '../models/pin'
+import {Bookings} from '../models/bookings'
+import {BookingService} from "./booking.service";
 
 describe('test-actions-service', () => {
-  let service: TestActionsService;
-  let fakePin = {
+  let mainService: PinsService;
+  let bookingService: BookingService;
+  const fakePin = {
     id: 0,
     y: 100,
     x: 100,
@@ -12,22 +16,23 @@ describe('test-actions-service', () => {
     booked: [],
   };
   beforeEach(() => {
-    service = new TestActionsService();
+    mainService = new PinsService();
+    bookingService = new BookingService(mainService);
   });
 
   it('should increase houses to one more', () => {
-    let defaultLength: number = service.houses.length;
+    const defaultLength: number = mainService.houses.length;
 
-    service.addPin(fakePin);
+    mainService.addPin(fakePin);
 
-    expect(service.houses.length).toBe(defaultLength + 1);
+    expect(mainService.houses.length).toBe(defaultLength + 1);
   });
 
   it('should check bookings date for crossings. It will be return false because no crossing', () => {
-    let newBooking = {} as bookings;
-    let prevBookings = [];
-    let tempBook1 = {} as bookings;
-    let tempBook2 = {} as bookings;
+    const newBooking = {} as Bookings;
+    const prevBookings = [];
+    const tempBook1 = {} as Bookings;
+    const tempBook2 = {} as Bookings;
     newBooking.startDate = new Date(2021, 5, 21);
     newBooking.endDate = new Date(2021, 5, 22);
     tempBook1.startDate = new Date(2021, 5, 25);
@@ -39,15 +44,15 @@ describe('test-actions-service', () => {
     prevBookings.push(tempBook2);
 
     expect(
-      service.checkCrossings4DatesPeriod(newBooking, prevBookings)
+      bookingService.isBookingExists(newBooking, prevBookings)
     ).toBeFalsy();
   });
 
   it('should check bookings date for crossings. It will be return true because crossing exist', () => {
-    let newBooking = {} as bookings;
-    let prevBookings = [];
-    let tempBook1 = {} as bookings;
-    let tempBook2 = {} as bookings;
+    const newBooking = {} as Bookings;
+    const prevBookings = [];
+    const tempBook1 = {} as Bookings;
+    const tempBook2 = {} as Bookings;
     newBooking.startDate = new Date(2021, 5, 20);
     newBooking.endDate = new Date(2021, 5, 28);
     tempBook1.startDate = new Date(2021, 5, 25);
@@ -59,12 +64,12 @@ describe('test-actions-service', () => {
     prevBookings.push(tempBook2);
 
     expect(
-      service.checkCrossings4DatesPeriod(newBooking, prevBookings)
+      bookingService.isBookingExists(newBooking, prevBookings)
     ).toBeTruthy();
   });
 
   it('should return active pin object has been chosen by user on map', () => {
-    let activePin: Pin = {
+    const activePin: Pin = {
       id: 0,
       y: 100,
       x: 100,
@@ -74,9 +79,9 @@ describe('test-actions-service', () => {
       booked: [],
     };
 
-    service.setActivePin(activePin);
-    let newPin: Pin = service.getActivePin();
+    mainService.setActivePin(activePin);
+    const newPin: Pin = mainService.getActivePin();
 
-    expect(service.activePin).toBe(newPin);
+    expect(mainService.activePin).toBe(newPin);
   });
 });

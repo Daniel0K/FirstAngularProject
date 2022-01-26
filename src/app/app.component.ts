@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { Pin, TestActionsService } from './services/test-actions.service';
+import {Component} from '@angular/core';
+import {PinsService} from './services/pins.service';
+import {Pin} from "./models/pin";
+import {CookiesService} from "./services/cookies.sevice";
 
 @Component({
   selector: 'app-root',
@@ -10,58 +12,49 @@ export class AppComponent {
   title = 'angular-basics';
   xClicked: number = 0;
   yClicked: number = 0;
-  cookiesTest: Pin[] = [];
+  parsedCookie: Pin[] = [];
   currentHouses: Pin[] = [];
   activePin: Pin = {} as Pin;
 
-  constructor(private TestActionsService: TestActionsService) {
-    this.currentHouses = TestActionsService.getCurrentHouses();
-    this.activePin = TestActionsService.activePin;
-    TestActionsService.setActivePin(TestActionsService.houses[0]);
-    if (document.cookie == '') {
-    } else {
-      this.checkPinCookies();
-      this.checkUpdatedPinCookies();
+  constructor(private pinsService: PinsService, private cookiesService: CookiesService) {
+    this.currentHouses = pinsService.getCurrentHouses();
+    this.activePin = pinsService.activePin;
+    pinsService.setActivePin(pinsService.houses[0]);
+    this.getPinsByCookieFromMap();
+    this.updateAllPinsByCookieFromMap();
+  }
+
+  getPinsByCookieFromMap() {
+    if (this.cookiesService.hasCookie('pin')) {
+      this.parsedCookie = <Pin[]>(
+        JSON.parse(this.cookiesService.getCookie('pin') || '')
+      );
+      this.pinsService.houses = this.pinsService.houses.concat(this.parsedCookie);
     }
   }
 
-  checkPinCookies() {
-    if (JSON.parse(this.TestActionsService.getCookie('pin') || '') === '') {
-      return;
-    } else {
-      this.cookiesTest = <Pin[]>(
-        JSON.parse(this.TestActionsService.getCookie('pin') || '')
+  updateAllPinsByCookieFromMap() {
+    if (this.cookiesService.hasCookie('updatedPins')) {
+      this.parsedCookie = <Pin[]>(
+        JSON.parse(this.cookiesService.getCookie('updatedPins') || '')
       );
-      for (let i = 0; i < this.cookiesTest.length; i++) {
-        this.TestActionsService.houses.push(this.cookiesTest[i]);
-      }
-    }
-  }
+      this.parsedCookie.forEach((item) => {
+        this.pinsService.houses[item.id] = item;
 
-  checkUpdatedPinCookies() {
-    if (
-      JSON.parse(this.TestActionsService.getCookie('updatedPins') || '') === ''
-    ) {
-      return;
-    } else {
-      this.cookiesTest = <Pin[]>(
-        JSON.parse(this.TestActionsService.getCookie('updatedPins') || '')
-      );
-      for (let i = 0; i < this.cookiesTest.length; i++) {
-        this.TestActionsService.houses[this.cookiesTest[i].id] =
-          this.cookiesTest[i];
-      }
+        this.pinsService.houses[this.pinsService.houses.findIndex(el => el.id === item.id)] =item;
+
+      });
     }
   }
 
   onClickPin(p: Pin) {
-    this.TestActionsService.setActivePin(p);
+    this.pinsService.setActivePin(p);
   }
 
   onClickMap(e: MouseEvent) {
-    this.TestActionsService.activeX = e.clientX;
+    this.pinsService.activeX = e.clientX;
     this.xClicked = e.clientX;
-    this.TestActionsService.activeY = e.clientY - 10;
+    this.pinsService.activeY = e.clientY - 10;
     this.yClicked = e.clientY - 10;
   }
 }

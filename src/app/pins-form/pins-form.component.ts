@@ -1,10 +1,11 @@
 import { Component, DoCheck, Input } from '@angular/core';
-import {
-  bookings,
-  Pin,
-  TestActionsService,
-} from '../services/test-actions.service';
+import {PinsService} from '../services/pins.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {Pin} from "../models/pin";
+import {Bookings} from "../models/bookings";
+import {BookingService} from '../services/booking.service'
+import {CookiesService} from "../services/cookies.sevice";
+
 
 @Component({
   selector: 'app-pins-form',
@@ -14,11 +15,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class PinsFormComponent implements DoCheck {
   @Input() housesData!: Pin;
   activePin: Pin = {} as Pin;
-  submittedBooking: bookings = {} as bookings;
+  submittedBooking: Bookings = {} as Bookings;
 
   form: FormGroup;
 
-  constructor(private TestActionsService: TestActionsService) {
+  constructor(private pinsService: PinsService, private bookingService: BookingService, private CookiesService: CookiesService) {
     this.form = new FormGroup({
       startDate: new FormControl('', [Validators.required]),
       endDate: new FormControl('', [Validators.required]),
@@ -26,28 +27,27 @@ export class PinsFormComponent implements DoCheck {
   }
 
   ngDoCheck() {
-    this.activePin = this.TestActionsService.getActivePin();
+    this.activePin = this.pinsService.getActivePin();
   }
 
   submit() {
     this.submittedBooking = {
-      startDate: this.form.value['startDate'],
-      endDate: this.form.value['endDate'],
+      startDate: this.form.value.startDate,
+      endDate: this.form.value.endDate,
     };
     if (
-      this.TestActionsService.checkCrossings4DatesPeriod(
-        this.TestActionsService.submittedBooking,
-        this.TestActionsService.houses[this.activePin.id].booked
+      !this.bookingService.isBookingExists(
+        this.pinsService.submittedBooking,
+        this.pinsService.houses[this.activePin.id].booked
       )
     ) {
-    } else {
-      this.TestActionsService.addBookingToHouseById(
+      this.bookingService.addBookingToHouseById(
         this.activePin.id,
         this.submittedBooking
       );
-      this.TestActionsService.setCookie('updatedPins', '');
+      this.CookiesService.setCookie('updatedPins', '');
       document.cookie = `updatedPins=${JSON.stringify(
-        this.TestActionsService.houses
+        this.pinsService.houses
       )}`;
     }
   }

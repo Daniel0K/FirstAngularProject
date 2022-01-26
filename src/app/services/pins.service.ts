@@ -1,25 +1,11 @@
 import { Injectable } from '@angular/core';
-
-export interface Pin {
-  id: number;
-  x: number;
-  y: number;
-  name: string;
-  address: string;
-  desc: string;
-  booked: bookings[];
-}
-
-export interface bookings {
-  startDate: Date;
-  endDate: Date;
-}
+import {Pin} from "../models/pin";
+import {Bookings} from "../models/bookings";
 
 @Injectable({
   providedIn: 'root',
 })
-export class TestActionsService {
-  constructor() {}
+export class PinsService {
 
   houses: Pin[] = [
     {
@@ -77,18 +63,15 @@ export class TestActionsService {
       booked: [],
     },
   ];
+
   activePin: Pin = {} as Pin;
   activeX: number = 999;
   activeY: number = 999;
   additionalHousesCookies: Pin[] = [];
-  submittedBooking: bookings = {} as bookings;
+  submittedBooking: Bookings = {} as Bookings;
 
   getCurrentHouses(): Pin[] {
     return this.houses;
-  }
-
-  addBookingToHouseById(id: number, submittedBooking: bookings) {
-    this.houses[id].booked.push(submittedBooking);
   }
 
   getActivePin(): Pin {
@@ -103,38 +86,5 @@ export class TestActionsService {
     this.houses.push(p);
     this.additionalHousesCookies.push(p);
     document.cookie = `pin=${JSON.stringify(this.additionalHousesCookies)}`;
-  }
-
-  getCookie(name: string) {
-    let matches = document.cookie.match(
-      new RegExp(
-        '(?:^|; )' +
-          name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') +
-          '=([^;]*)'
-      )
-    );
-    return matches ? decodeURIComponent(matches[1]) : undefined;
-  }
-
-  setCookie(name: string, value: string) {
-    let updatedCookie: string = `${name}=${value}`;
-    document.cookie = updatedCookie;
-  }
-
-  checkCrossings4DatesPeriod(
-    currentBooking: bookings,
-    existBookings: bookings[]
-  ): boolean {
-    for (let i = 0; i < existBookings.length; i++) {
-      if (
-        currentBooking.startDate <= existBookings[i].endDate &&
-        existBookings[i].startDate <= currentBooking.endDate
-      ) {
-        return true;
-      } else {
-        continue;
-      }
-    }
-    return false;
   }
 }
