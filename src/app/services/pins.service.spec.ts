@@ -29,7 +29,7 @@ describe('test-actions-service', () => {
     expect(mainService.houses.length).toBe(defaultLength + 1);
   });
 
-  it('should check bookings date for crossings. It will be return false because no crossing', () => {
+  it('should check bookings date for crossings. It will be return true because no crossing', () => {
     const newBooking = {} as Bookings;
     const prevBookings = [];
     const tempBook1 = {} as Bookings;
@@ -45,11 +45,11 @@ describe('test-actions-service', () => {
     prevBookings.push(tempBook2);
 
     expect(
-      bookingService.isBookingExists(newBooking, prevBookings)
-    ).toBeFalsy();
+      bookingService.isDateCrossingExists(newBooking, prevBookings)
+    ).toBeTruthy();
   });
 
-  it('should check bookings date for crossings. It will be return true because crossing exist', () => {
+  it('should check bookings date for crossings. It will be return false because crossing exist', () => {
     const newBooking = {} as Bookings;
     const prevBookings = [];
     const tempBook1 = {} as Bookings;
@@ -65,8 +65,8 @@ describe('test-actions-service', () => {
     prevBookings.push(tempBook2);
 
     expect(
-      bookingService.isBookingExists(newBooking, prevBookings)
-    ).toBeTruthy();
+      bookingService.isDateCrossingExists(newBooking, prevBookings)
+    ).toBeFalsy();
   });
 
   it('should return active pin object has been chosen by user on map', () => {
