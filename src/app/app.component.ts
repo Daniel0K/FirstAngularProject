@@ -20,10 +20,10 @@ export class AppComponent {
     private pinsService: PinsService,
     private cookiesService: CookiesService
   ) {
-    this.currentHouses = pinsService.getCurrentHouses();
-    this.activePin = this.pinsService.getActivePin();
+    this.activePin = pinsService.getActivePin();
     this.getPinsByCookieFromMap();
     this.updateAllPinsByCookieFromMap();
+    this.currentHouses = pinsService.getCurrentHouses();
   }
 
   getPinsByCookieFromMap() {
@@ -34,6 +34,8 @@ export class AppComponent {
       this.pinsService.houses = this.pinsService.houses.concat(
         this.parsedCookie
       );
+      this.pinsService.additionalHousesCookies =
+        this.pinsService.additionalHousesCookies.concat(this.parsedCookie);
     }
   }
 
@@ -44,17 +46,12 @@ export class AppComponent {
       );
       this.parsedCookie.forEach((item) => {
         this.pinsService.houses[item.id] = item;
-
-        this.pinsService.houses[
-          this.pinsService.houses.findIndex((el) => el.id === item.id)
-        ] = item;
       });
     }
   }
 
   onClickPin(p: Pin) {
     this.pinsService.setActivePin(p);
-    this.activePin = this.pinsService.getActivePin();
   }
 
   onClickMap(e: MouseEvent) {

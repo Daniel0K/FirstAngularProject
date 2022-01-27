@@ -54,7 +54,6 @@ export class PinsFormComponent {
         this.activePin.id,
         this.submittedBooking
       );
-      this.CookiesService.setCookie('updatedPins', '');
       document.cookie = `updatedPins=${JSON.stringify(
         this.pinsService.houses
       )}`;
