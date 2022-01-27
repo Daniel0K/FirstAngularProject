@@ -1,6 +1,6 @@
 <div></div>
 <img
-  [ngClass]="inputPin == activePin ? 'coordPinsBlue' : 'coordPinsBlack'"
+  [ngClass]="isActive() ? 'coordPinsBlue' : 'coordPinsBlack'"
   src="assets/pin.svg"
   style="{{ styleCord }}"
   style="cursor: pointer"

@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {PinsService} from './services/pins.service';
-import {Pin} from "./models/pin";
-import {CookiesService} from "./services/cookies.sevice";
+import { Component } from '@angular/core';
+import { PinsService } from './services/pins.service';
+import { Pin } from './models/pin';
+import { CookiesService } from './services/cookies.sevice';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +14,15 @@ export class AppComponent {
   yClicked: number = 0;
   parsedCookie: Pin[] = [];
   currentHouses: Pin[] = [];
-  activePin: Pin = {} as Pin;
+  activePin: Pin;
 
-  constructor(private pinsService: PinsService, private cookiesService: CookiesService) {
+  constructor(
+    private pinsService: PinsService,
+    private cookiesService: CookiesService
+  ) {
     this.currentHouses = pinsService.getCurrentHouses();
-    this.activePin = pinsService.activePin;
-    pinsService.setActivePin(pinsService.houses[0]);
+    this.activePin = this.pinsService.getActivePin();
+    // pinsService.setActivePin(pinsService.houses[0]);
     this.getPinsByCookieFromMap();
     this.updateAllPinsByCookieFromMap();
   }
@@ -29,7 +32,9 @@ export class AppComponent {
       this.parsedCookie = <Pin[]>(
         JSON.parse(this.cookiesService.getCookie('pin') || '')
       );
-      this.pinsService.houses = this.pinsService.houses.concat(this.parsedCookie);
+      this.pinsService.houses = this.pinsService.houses.concat(
+        this.parsedCookie
+      );
     }
   }
 
@@ -41,14 +46,16 @@ export class AppComponent {
       this.parsedCookie.forEach((item) => {
         this.pinsService.houses[item.id] = item;
 
-        this.pinsService.houses[this.pinsService.houses.findIndex(el => el.id === item.id)] =item;
-
+        this.pinsService.houses[
+          this.pinsService.houses.findIndex((el) => el.id === item.id)
+        ] = item;
       });
     }
   }
 
   onClickPin(p: Pin) {
     this.pinsService.setActivePin(p);
+    this.activePin = this.pinsService.getActivePin();
   }
 
   onClickMap(e: MouseEvent) {
