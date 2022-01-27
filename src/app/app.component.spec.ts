@@ -42,10 +42,19 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should set active pin on click ', () => {
-    const testPin: Pin = service.houses[3];
+  it('should set active pin on click, pin should exist in array ', () => {
+    const testPin: Pin = {
+      id: 0,
+      y: 885,
+      x: 150,
+      name: 'Россия',
+      address: 'Лучший',
+      desc: 'Самое топовое место в мире ',
+      booked: [],
+      isActive: true,
+    };
     component.onClickPin(testPin);
-    expect(service.getActivePin()).toBe(testPin);
+    expect(service.getActivePin()).toEqual(testPin);
   });
 
   it('should set active pin by value', () => {

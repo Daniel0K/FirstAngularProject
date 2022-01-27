@@ -22,7 +22,6 @@ export class AppComponent {
   ) {
     this.currentHouses = pinsService.getCurrentHouses();
     this.activePin = this.pinsService.getActivePin();
-    // pinsService.setActivePin(pinsService.houses[0]);
     this.getPinsByCookieFromMap();
     this.updateAllPinsByCookieFromMap();
   }
