@@ -3,6 +3,6 @@
   *ngFor="let p of currentHouses"
   [inputPin]="p"
 ></app-pins>
-<app-pins-form [housesData]="activePin"></app-pins-form>
+<app-pins-form [activePin]="activePin"></app-pins-form>
 <app-add-house-form></app-add-house-form>
 <div (click)="onClickMap($event)" class="map"></div>

@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PinsFormComponent } from './pins-form.component';
 import { PinsService } from '../services/pins.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Bookings } from '../models/bookings';
 
 describe('PinsForm', () => {
   let component: PinsFormComponent;
@@ -10,11 +11,7 @@ describe('PinsForm', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PinsFormComponent],
-      providers: [
-        ReactiveFormsModule,
-        FormsModule,
-        { provide: PinsService },
-      ],
+      providers: [ReactiveFormsModule, FormsModule, { provide: PinsService }],
     });
     fixture = TestBed.createComponent(PinsFormComponent);
     component = fixture.componentInstance;
@@ -34,16 +31,17 @@ describe('PinsForm', () => {
   });
 
   it('should add booking to house after submit', () => {
-    service.activePin = {
+    const activePin = {
       id: 0,
       y: 100,
       x: 100,
       name: 'Тестовандия',
       address: 'Тестовый',
       desc: 'Тестовая среда',
-      booked: [],
+      booked: [] as Bookings[],
     };
-    component.activePin = service.activePin;
+
+    component.activePin = activePin;
     const el = component.form.get('startDate');
     el?.setValue(new Date(2023, 1, 1));
     const el2 = component.form.get('endDate');

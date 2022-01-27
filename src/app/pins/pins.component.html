@@ -1,5 +1,7 @@
 <div></div>
-  <img class="coordPins" src="assets/pin.svg" style="{{styleCord}}" style="cursor: pointer" >
-
-
-
+<img
+  [ngClass]="isActive() ? 'coordPinsBlue' : 'coordPinsBlack'"
+  src="assets/pin.svg"
+  style="{{ styleCord }}"
+  style="cursor: pointer"
+/>

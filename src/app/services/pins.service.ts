@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import {Pin} from "../models/pin";
-import {Bookings} from "../models/bookings";
+import { Pin } from '../models/pin';
+import { Bookings } from '../models/bookings';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PinsService {
-
   houses: Pin[] = [
     {
       id: 0,
@@ -64,7 +63,7 @@ export class PinsService {
     },
   ];
 
-  activePin: Pin = {} as Pin;
+  activePin: Pin = null;
   activeX: number = 999;
   activeY: number = 999;
   additionalHousesCookies: Pin[] = [];
@@ -75,11 +74,16 @@ export class PinsService {
   }
 
   getActivePin(): Pin {
-    return this.activePin;
+    return this.houses.find((x) => x.isActive);
   }
 
   setActivePin(p: Pin) {
-    this.activePin = p;
+    this.houses.find((x) => x.id === p.id).isActive = true;
+    this.houses
+      .filter((x) => x.id !== p.id)
+      .forEach((x) => {
+        x.isActive = false;
+      });
   }
 
   addPin(p: Pin) {
