@@ -33,7 +33,7 @@ export class PinsFormComponent {
       endDate: this.form.value.endDate,
     };
     if (
-      this.bookingService.isBookingExists(
+      this.bookingService.isBookingAvailable(
         this.submittedBooking,
         this.pinsService.houses[this.activePin.id].booked
       )

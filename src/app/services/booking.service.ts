@@ -16,29 +16,22 @@ export class BookingService {
     currentBooking: Bookings,
     existBookings: Bookings[]
   ): boolean {
-    for (let i = 0; i < existBookings.length; i++) {
+    for (const item of existBookings) {
       if (
-        currentBooking.startDate <= existBookings[i].endDate &&
-        existBookings[i].startDate <= currentBooking.endDate
+        currentBooking.startDate <= item.endDate &&
+        item.startDate <= currentBooking.endDate
       ) {
         return false;
-      } else {
-        continue;
       }
+      continue;
     }
     return true;
   }
 
-  isBookingExists(
+  isBookingAvailable(
     currentBooking: Bookings,
     existBookings: Bookings[]
   ): boolean {
-    if (!(currentBooking.endDate <= currentBooking.startDate)) {
-      if (currentBooking.startDate !== currentBooking.endDate) {
-        if (this.isDateCrossingExists(currentBooking, existBookings)) {
-          return true;
-        } else return false;
-      } else return false;
-    } else return false;
+    return this.isDateCrossingExists(currentBooking, existBookings);
   }
 }

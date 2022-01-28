@@ -1,18 +1,25 @@
 <form class="card" [formGroup]="form" (ngSubmit)="submit()">
   <div>
-    <p id="name"><strong>Название:</strong> {{activePin.name}}</p>
-    <p id="address"><strong>Адрес:</strong> {{activePin.address}}</p>
-    <p id="description"><strong id="desc">Описание:</strong> {{activePin.desc}}</p>
+    <p id="name"><strong>Название:</strong> {{ activePin.name }}</p>
+    <p id="address"><strong>Адрес:</strong> {{ activePin.address }}</p>
+    <p id="description">
+      <strong id="desc">Описание:</strong> {{ activePin.desc }}
+    </p>
   </div>
   <p>Активные бронирования:</p>
-  <div *ngFor="let p of activePin.booked"
-  >{{p.startDate}} - {{p.endDate}}</div>
+  <div *ngFor="let p of activePin.booked">
+    {{ p.startDate }} - {{ p.endDate }}
+  </div>
   <p><i>Выберите дату начала аренды</i></p>
-  <input type="date" name="Start" formControlName="startDate">
+  <input type="date" name="Start" formControlName="startDate" />
   <p><i>Выберите дату окончания аренды</i></p>
-  <input type="date" name="End" formControlName="endDate">
-  <button class="btn" id="#btn1" type="submit" [disabled]="form.invalid">Забронировать Дом</button>
+  <input
+    type="date"
+    name="End"
+    min="{{ this.form.value.startDate }}"
+    formControlName="endDate"
+  />
+  <button class="btn" id="#btn1" type="submit" [disabled]="form.invalid">
+    Забронировать Дом
+  </button>
 </form>
-
-
-
