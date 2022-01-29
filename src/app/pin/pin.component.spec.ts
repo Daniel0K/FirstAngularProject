@@ -1,15 +1,15 @@
-import { PinsComponent } from '../pins/pins.component';
+import { PinComponent } from './pin.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-describe('Pins', () => {
-  let component: PinsComponent;
-  let fixture: ComponentFixture<PinsComponent>;
+describe('Pin', () => {
+  let component: PinComponent;
+  let fixture: ComponentFixture<PinComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PinsComponent],
+      declarations: [PinComponent],
     });
-    fixture = TestBed.createComponent(PinsComponent);
+    fixture = TestBed.createComponent(PinComponent);
     component = fixture.componentInstance;
   });
 

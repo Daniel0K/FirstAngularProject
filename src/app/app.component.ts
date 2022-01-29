@@ -15,8 +15,9 @@ export class AppComponent {
   yClicked: number = 0;
   parsedCookie: Pin[] = [];
   currentHouses: Pin[] = [];
-  activePin: Pin = null;
+  activePin: Pin;
   subActivePin: Subscription;
+  tempPin: Pin = {} as Pin;
 
   constructor(
     private pinsService: PinsService,
@@ -65,6 +66,7 @@ export class AppComponent {
     this.xClicked = e.clientX;
     this.pinsService.activeY = e.clientY - 10;
     this.yClicked = e.clientY - 10;
+    this.tempPin = { x: this.yClicked, y: this.xClicked } as Pin;
   }
 
   onDestroy() {

@@ -2,18 +2,27 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Pin } from '../models/pin';
 
 @Component({
-  selector: 'app-pins',
-  templateUrl: './pins.component.html',
-  styleUrls: ['./pins.component.scss'],
+  selector: 'app-pin',
+  templateUrl: './pin.component.html',
+  styleUrls: ['./pin.component.scss'],
 })
-export class PinsComponent implements OnInit {
+export class PinComponent implements OnInit {
   @Input() inputPin: Pin;
 
   styleCord: string;
   styleActivePinColor: string;
+  styleDisplay!: string;
 
   ngOnInit() {
     this.changeStylePosition(this.inputPin.x, this.inputPin.y);
+  }
+
+  ngOnChanges() {
+    this.changeStylePosition(this.inputPin.x, this.inputPin.y);
+  }
+
+  isTemp() {
+    return this.inputPin.x === undefined;
   }
 
   changeStylePosition(x: number, y: number): void {

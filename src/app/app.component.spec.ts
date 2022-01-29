@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { PinsService } from './services/pins.service';
 import { AddHouseFormComponent } from './add-house-form/add-house-form.component';
-import { PinsComponent } from './pins/pins.component';
+import { PinComponent } from './pin/pin.component';
 import { PinsFormComponent } from './pins-form/pins-form.component';
 import { Pin } from './models/pin';
 
@@ -15,7 +15,7 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        PinsComponent,
+        PinComponent,
         AddHouseFormComponent,
         PinsFormComponent,
       ],
@@ -68,7 +68,7 @@ describe('AppComponent', () => {
     expect(service.activeY).toBe(140);
   });
 
-  it('should push new pins to service houses', () => {
+  it('should push new pin to service houses', () => {
     document.cookie =
       'pin=[{"id":6,"x":82,"y":675,"name":"sdfsdfs","address":"jhkjhkj","desc":"jkhjkhkjhk","booked":[]},{"id":7,"x":311,"y":84,"name":"sdfsdfs","address":"jhkjhkj","desc":"jkhjkhkjhk","booked":[]}]';
     component.getPinsByCookieFromMap();

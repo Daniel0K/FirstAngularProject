@@ -1,8 +1,11 @@
-<app-pins
+<div (click)="onClickMap($event)" class="map"></div>
+<app-pin
   (click)="onClickPin(p)"
   *ngFor="let p of currentHouses"
   [inputPin]="p"
-></app-pins>
-<app-pins-form [activePin]="activePin"></app-pins-form>
-<app-add-house-form></app-add-house-form>
-<div (click)="onClickMap($event)" class="map"></div>
+></app-pin>
+<app-pin [inputPin]="tempPin"></app-pin>
+<div class="parent">
+  <app-pins-form [activePin]="activePin"></app-pins-form>
+  <app-add-house-form></app-add-house-form>
+</div>

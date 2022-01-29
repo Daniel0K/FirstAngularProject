@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CookieModule } from 'ngx-cookie';
 import { AddHouseFormModule } from './add-house-form/add-house-form.module';
 import { PinsFormModule } from './pins-form/pins-form.module';
-import { PinsModule } from './pins/pins.module';
+import { PinModule } from './pin/pin.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,7 +16,7 @@ import { PinsModule } from './pins/pins.module';
     CookieModule.forRoot(),
     AddHouseFormModule,
     PinsFormModule,
-    PinsModule,
+    PinModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
