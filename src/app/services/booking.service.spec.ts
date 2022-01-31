@@ -11,17 +11,20 @@ describe('test-actions-service', () => {
     bookingService = new BookingService(mainService);
   });
 
-  it('should check bookings date for crossings. It will be return true because no crossing', () => {
-    const newBooking = {} as Bookings;
+  it('should return true when there are no crossing', () => {
+    const newBooking: Bookings = {
+      startDate: new Date(2021, 5, 21),
+      endDate: new Date(2021, 5, 22),
+    };
     const prevBookings = [];
-    const tempBook1 = {} as Bookings;
-    const tempBook2 = {} as Bookings;
-    newBooking.startDate = new Date(2021, 5, 21);
-    newBooking.endDate = new Date(2021, 5, 22);
-    tempBook1.startDate = new Date(2021, 5, 25);
-    tempBook1.endDate = new Date(2021, 5, 26);
-    tempBook2.startDate = new Date(2021, 5, 27);
-    tempBook2.endDate = new Date(2021, 5, 28);
+    const tempBook1 = {
+      startDate: new Date(2021, 5, 25),
+      endDate: new Date(2021, 5, 26),
+    };
+    const tempBook2 = {
+      startDate: new Date(2021, 5, 27),
+      endDate: new Date(2021, 5, 28),
+    };
 
     prevBookings.push(tempBook1);
     prevBookings.push(tempBook2);
@@ -31,17 +34,20 @@ describe('test-actions-service', () => {
     ).toBeTruthy();
   });
 
-  it('should check bookings date for crossings. It will be return false because crossing exist', () => {
-    const newBooking = {} as Bookings;
+  it('should return false when crossing exists', () => {
+    const newBooking: Bookings = {
+      startDate: new Date(2021, 5, 20),
+      endDate: new Date(2021, 5, 28),
+    };
     const prevBookings = [];
-    const tempBook1 = {} as Bookings;
-    const tempBook2 = {} as Bookings;
-    newBooking.startDate = new Date(2021, 5, 20);
-    newBooking.endDate = new Date(2021, 5, 28);
-    tempBook1.startDate = new Date(2021, 5, 25);
-    tempBook1.endDate = new Date(2021, 5, 26);
-    tempBook2.startDate = new Date(2021, 5, 27);
-    tempBook2.endDate = new Date(2021, 5, 28);
+    const tempBook1 = {
+      startDate: new Date(2021, 5, 25),
+      endDate: new Date(2021, 5, 26),
+    };
+    const tempBook2 = {
+      startDate: new Date(2021, 5, 27),
+      endDate: new Date(2021, 5, 28),
+    };
 
     prevBookings.push(tempBook1);
     prevBookings.push(tempBook2);
@@ -50,6 +56,4 @@ describe('test-actions-service', () => {
       bookingService.isDateCrossingExists(newBooking, prevBookings)
     ).toBeFalsy();
   });
-
-  it('check if endDate less than startDate', () => {});
 });

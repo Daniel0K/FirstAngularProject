@@ -16,10 +16,10 @@ export class BookingService {
     currentBooking: Bookings,
     existBookings: Bookings[]
   ): boolean {
-    for (const item of existBookings) {
+    for (const existBooking of existBookings) {
       if (
-        currentBooking.startDate <= item.endDate &&
-        item.startDate <= currentBooking.endDate
+        currentBooking.startDate < existBooking.endDate &&
+        existBooking.startDate < currentBooking.endDate
       ) {
         return false;
       }

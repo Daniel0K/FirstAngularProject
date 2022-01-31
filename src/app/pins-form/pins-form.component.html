@@ -11,15 +11,20 @@
     {{ p.startDate }} - {{ p.endDate }}
   </div>
   <p><i>Выберите дату начала аренды</i></p>
-  <input type="date" name="Start" formControlName="startDate" />
+  <input
+    type="date"
+    name="Start"
+    min="{{ startDate }}"
+    formControlName="startDate"
+  />
   <p><i>Выберите дату окончания аренды</i></p>
   <input
     type="date"
     name="End"
-    min="{{ this.form.value.startDate }}"
+    min="{{ startDate }}"
     formControlName="endDate"
   />
-  <button class="btn" id="#btn1" type="submit" [disabled]="form.invalid">
+  <button class="btn" type="submit" [disabled]="form.invalid">
     Забронировать Дом
   </button>
 </form>

@@ -15,6 +15,7 @@ export class PinsFormComponent {
   @Input() activePin!: Pin;
   submittedBooking: Bookings = {} as Bookings;
   form: FormGroup;
+  startDate: Date;
 
   constructor(
     private pinsService: PinsService,
@@ -25,7 +26,8 @@ export class PinsFormComponent {
       startDate: new FormControl('', [Validators.required]),
       endDate: new FormControl('', [Validators.required]),
     });
-    this.form.value.startDate = new Date().getDate();
+    this.form.value.startDate = new Date().toISOString().split('T')[0];
+    this.startDate = this.form.value.startDate;
   }
 
   submit() {
