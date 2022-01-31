@@ -50,5 +50,6 @@ export class PinsFormComponent {
         this.pinsService.houses
       )}`;
     }
+    this.form.reset();
   }
 }

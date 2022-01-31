@@ -40,17 +40,15 @@ describe('test-actions-service', () => {
       endDate: new Date(2021, 5, 28),
     };
     const prevBookings = [];
-    const tempBook1 = {
-      startDate: new Date(2021, 5, 25),
-      endDate: new Date(2021, 5, 26),
-    };
-    const tempBook2 = {
+
+    prevBookings.push({
       startDate: new Date(2021, 5, 27),
       endDate: new Date(2021, 5, 28),
-    };
-
-    prevBookings.push(tempBook1);
-    prevBookings.push(tempBook2);
+    });
+    prevBookings.push({
+      startDate: new Date(2021, 5, 25),
+      endDate: new Date(2021, 5, 26),
+    });
 
     expect(
       bookingService.isDateCrossingExists(newBooking, prevBookings)
