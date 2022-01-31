@@ -32,6 +32,9 @@ export class BookingService {
     currentBooking: Bookings,
     existBookings: Bookings[]
   ): boolean {
-    return this.isDateCrossingExists(currentBooking, existBookings);
+    return (
+      this.isDateCrossingExists(currentBooking, existBookings) &&
+      currentBooking.startDate !== currentBooking.endDate
+    );
   }
 }

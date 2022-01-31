@@ -16,6 +16,7 @@ export class PinsFormComponent {
   submittedBooking: Bookings = {} as Bookings;
   form: FormGroup;
   startDate: Date;
+  chosenStartDate: Date;
 
   constructor(
     private pinsService: PinsService,
@@ -28,6 +29,10 @@ export class PinsFormComponent {
     });
     this.form.value.startDate = new Date().toISOString().split('T')[0];
     this.startDate = this.form.value.startDate;
+  }
+
+  ngOnChanges() {
+    this.chosenStartDate = this.form.value.startDate;
   }
 
   submit() {
