@@ -25,6 +25,7 @@ export class PinsFormComponent {
       startDate: new FormControl('', [Validators.required]),
       endDate: new FormControl('', [Validators.required]),
     });
+    this.form.value.startDate = new Date().getDate();
   }
 
   submit() {
