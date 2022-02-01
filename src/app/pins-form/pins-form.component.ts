@@ -29,10 +29,10 @@ export class PinsFormComponent {
     });
     this.form.value.startDate = new Date().toISOString().split('T')[0];
     this.startDate = this.form.value.startDate;
-  }
-
-  ngOnChanges() {
-    this.chosenStartDate = this.form.value.startDate;
+    this.form.get('startDate').valueChanges.subscribe((selectedValue) => {
+      this.startDate = selectedValue;
+      this.chosenStartDate = selectedValue;
+    });
   }
 
   submit() {
