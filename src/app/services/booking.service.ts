@@ -2,33 +2,39 @@ import { Injectable } from '@angular/core';
 import { Bookings } from '../models/bookings';
 import { PinsService } from './pins.service';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class BookingService {
-
-  constructor(private pinsService: PinsService) {
-  }
+  constructor(private pinsService: PinsService) {}
 
   addBookingToHouseById(id: number, submittedBooking: Bookings) {
     this.pinsService.houses[id].booked.push(submittedBooking);
   }
 
-  isBookingExists(
+  isDateCrossingExists(
     currentBooking: Bookings,
     existBookings: Bookings[]
   ): boolean {
-    for (let i = 0; i < existBookings.length; i++) {
+    for (const existBooking of existBookings) {
       if (
-        currentBooking.startDate <= existBookings[i].endDate &&
-        existBookings[i].startDate <= currentBooking.endDate
+        currentBooking.startDate < existBooking.endDate &&
+        existBooking.startDate < currentBooking.endDate
       ) {
-        return true;
-      } else {
-        continue;
+        return false;
       }
+      continue;
     }
-    return false;
+    return true;
+  }
+
+  isBookingAvailable(
+    currentBooking: Bookings,
+    existBookings: Bookings[]
+  ): boolean {
+    return (
+      this.isDateCrossingExists(currentBooking, existBookings) &&
+      currentBooking.startDate !== currentBooking.endDate
+    );
   }
 }

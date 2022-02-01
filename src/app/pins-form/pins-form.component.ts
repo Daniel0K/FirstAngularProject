@@ -5,6 +5,7 @@ import { Pin } from '../models/pin';
 import { Bookings } from '../models/bookings';
 import { BookingService } from '../services/booking.service';
 import { CookiesService } from '../services/cookies.sevice';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-pins-form',
@@ -15,6 +16,9 @@ export class PinsFormComponent {
   @Input() activePin!: Pin;
   submittedBooking: Bookings = {} as Bookings;
   form: FormGroup;
+  startDate: Date;
+  chosenStartDate: Date;
+  subscription: Subscription;
 
   constructor(
     private pinsService: PinsService,
@@ -25,6 +29,14 @@ export class PinsFormComponent {
       startDate: new FormControl('', [Validators.required]),
       endDate: new FormControl('', [Validators.required]),
     });
+    this.form.value.startDate = new Date().toISOString().split('T')[0];
+    this.startDate = this.form.value.startDate;
+    this.subscription = this.form
+      .get('startDate')
+      .valueChanges.subscribe((selectedValue) => {
+        this.startDate = selectedValue;
+        this.chosenStartDate = selectedValue;
+      });
   }
 
   submit() {
@@ -33,8 +45,8 @@ export class PinsFormComponent {
       endDate: this.form.value.endDate,
     };
     if (
-      !this.bookingService.isBookingExists(
-        this.pinsService.submittedBooking,
+      this.bookingService.isBookingAvailable(
+        this.submittedBooking,
         this.pinsService.houses[this.activePin.id].booked
       )
     ) {
@@ -47,5 +59,10 @@ export class PinsFormComponent {
         this.pinsService.houses
       )}`;
     }
+    this.form.reset();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
