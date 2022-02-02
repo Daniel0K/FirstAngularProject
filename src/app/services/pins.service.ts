@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Pin } from '../models/pin';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -66,6 +67,7 @@ export class PinsService {
   activeX: number = 999;
   activeY: number = 999;
   additionalHousesCookies: Pin[] = [];
+  activePinStream$: Subject<Pin> = new Subject<Pin>();
 
   getCurrentHouses(): Pin[] {
     this.houses.forEach((x) => {
@@ -85,6 +87,7 @@ export class PinsService {
       .forEach((x) => {
         x.isActive = false;
       });
+    this.activePinStream$.next(this.activePin);
   }
 
   addPin(p: Pin) {

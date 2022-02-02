@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PinsService } from './services/pins.service';
 import { Pin } from './models/pin';
 import { CookiesService } from './services/cookies.sevice';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ export class AppComponent {
   yClicked: number = 0;
   parsedCookie: Pin[] = [];
   currentHouses: Pin[] = [];
-  activePin: Pin;
+  activePin: Pin = null;
+  subActivePin: Subscription;
 
   constructor(
     private pinsService: PinsService,
@@ -23,6 +25,9 @@ export class AppComponent {
     this.getPinsByCookieFromMap();
     this.updateAllPinsByCookieFromMap();
     this.currentHouses = pinsService.getCurrentHouses();
+    this.subActivePin = this.pinsService.activePinStream$.subscribe(() => {
+      this.activePin = this.pinsService.getActivePin();
+    });
   }
 
   getPinsByCookieFromMap() {
@@ -59,5 +64,9 @@ export class AppComponent {
     this.xClicked = e.clientX;
     this.pinsService.activeY = e.clientY - 10;
     this.yClicked = e.clientY - 10;
+  }
+
+  onDestroy() {
+    this.subActivePin.unsubscribe();
   }
 }
