@@ -4,7 +4,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Pin } from '../models/pin';
 import { Bookings } from '../models/bookings';
 import { BookingService } from '../services/booking.service';
-import { CookiesService } from '../services/cookies.sevice';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -22,8 +21,7 @@ export class PinsFormComponent {
 
   constructor(
     private pinsService: PinsService,
-    private bookingService: BookingService,
-    private CookiesService: CookiesService
+    private bookingService: BookingService
   ) {
     this.form = new FormGroup({
       startDate: new FormControl('', [Validators.required]),

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Pin } from '../models/pin';
-import { Bookings } from '../models/bookings';
 
 @Injectable({
   providedIn: 'root',
@@ -63,13 +62,15 @@ export class PinsService {
     },
   ];
 
-  activePin: Pin = null;
+  activePin: Pin = {} as Pin;
   activeX: number = 999;
   activeY: number = 999;
   additionalHousesCookies: Pin[] = [];
-  submittedBooking: Bookings = {} as Bookings;
 
   getCurrentHouses(): Pin[] {
+    this.houses.forEach((x) => {
+      x.isActive = false;
+    });
     return this.houses;
   }
 

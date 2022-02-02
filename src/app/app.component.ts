@@ -20,7 +20,6 @@ export class AppComponent {
     private pinsService: PinsService,
     private cookiesService: CookiesService
   ) {
-    this.activePin = pinsService.getActivePin();
     this.getPinsByCookieFromMap();
     this.updateAllPinsByCookieFromMap();
     this.currentHouses = pinsService.getCurrentHouses();
@@ -52,6 +51,7 @@ export class AppComponent {
 
   onClickPin(p: Pin) {
     this.pinsService.setActivePin(p);
+    this.activePin = this.pinsService.getActivePin();
   }
 
   onClickMap(e: MouseEvent) {
