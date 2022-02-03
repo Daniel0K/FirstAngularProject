@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PinsService } from './services/pins.service';
 import { Pin } from './models/pin';
 import { CookiesService } from './services/cookies.sevice';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -14,16 +15,20 @@ export class AppComponent {
   yClicked: number = 0;
   parsedCookie: Pin[] = [];
   currentHouses: Pin[] = [];
-  activePin: Pin;
+  activePin: Pin = null;
+  subActivePin: Subscription;
 
   constructor(
     private pinsService: PinsService,
     private cookiesService: CookiesService
   ) {
-    this.currentHouses = pinsService.getCurrentHouses();
-    this.activePin = this.pinsService.getActivePin();
     this.getPinsByCookieFromMap();
     this.updateAllPinsByCookieFromMap();
+    this.pinsService.clearActivePinFlag();
+    this.currentHouses = pinsService.getCurrentHouses();
+    this.subActivePin = this.pinsService.activePinStream$.subscribe(() => {
+      this.activePin = this.pinsService.getActivePin();
+    });
   }
 
   getPinsByCookieFromMap() {
@@ -34,6 +39,8 @@ export class AppComponent {
       this.pinsService.houses = this.pinsService.houses.concat(
         this.parsedCookie
       );
+      this.pinsService.additionalHousesCookies =
+        this.pinsService.additionalHousesCookies.concat(this.parsedCookie);
     }
   }
 
@@ -44,10 +51,6 @@ export class AppComponent {
       );
       this.parsedCookie.forEach((item) => {
         this.pinsService.houses[item.id] = item;
-
-        this.pinsService.houses[
-          this.pinsService.houses.findIndex((el) => el.id === item.id)
-        ] = item;
       });
     }
   }
@@ -62,5 +65,9 @@ export class AppComponent {
     this.xClicked = e.clientX;
     this.pinsService.activeY = e.clientY - 10;
     this.yClicked = e.clientY - 10;
+  }
+
+  onDestroy() {
+    this.subActivePin.unsubscribe();
   }
 }

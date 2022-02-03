@@ -1,30 +1,32 @@
-<form class="card" [formGroup]="form" (ngSubmit)="submit()">
-  <div>
-    <p id="name"><strong>Название:</strong> {{ activePin.name }}</p>
-    <p id="address"><strong>Адрес:</strong> {{ activePin.address }}</p>
-    <p id="description">
-      <strong id="desc">Описание:</strong> {{ activePin.desc }}
-    </p>
-  </div>
-  <p>Активные бронирования:</p>
-  <div *ngFor="let p of activePin.booked">
-    {{ p.startDate }} - {{ p.endDate }}
-  </div>
-  <p><i>Выберите дату начала аренды</i></p>
-  <input
-    type="date"
-    name="Start"
-    min="{{ startDate }}"
-    formControlName="startDate"
-  />
-  <p><i>Выберите дату окончания аренды</i></p>
-  <input
-    type="date"
-    name="End"
-    min="{{ chosenStartDate }}"
-    formControlName="endDate"
-  />
-  <button class="btn" type="submit" [disabled]="form.invalid">
-    Забронировать Дом
-  </button>
-</form>
+<ng-container *ngIf="activePin">
+  <form class="card" [formGroup]="form" (ngSubmit)="submit()">
+    <div>
+      <p id="name"><strong>Название:</strong> {{ activePin.name }}</p>
+      <p id="address"><strong>Адрес:</strong> {{ activePin.address }}</p>
+      <p id="description">
+        <strong id="desc">Описание:</strong> {{ activePin.desc }}
+      </p>
+    </div>
+    <p>Активные бронирования:</p>
+    <div *ngFor="let p of activePin.booked">
+      {{ p.startDate }} - {{ p.endDate }}
+    </div>
+    <p><i>Выберите дату начала аренды</i></p>
+    <input
+      type="date"
+      name="Start"
+      min="{{ startDate }}"
+      formControlName="startDate"
+    />
+    <p><i>Выберите дату окончания аренды</i></p>
+    <input
+      type="date"
+      name="End"
+      min="{{ chosenStartDate }}"
+      formControlName="endDate"
+    />
+    <button class="btn" type="submit" [disabled]="form.invalid">
+      Забронировать Дом
+    </button>
+  </form>
+</ng-container>
