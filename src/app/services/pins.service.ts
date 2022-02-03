@@ -70,10 +70,13 @@ export class PinsService {
   activePinStream$: Subject<Pin> = new Subject<Pin>();
 
   getCurrentHouses(): Pin[] {
+    return this.houses;
+  }
+
+  clearActivePinFlag() {
     this.houses.forEach((x) => {
       x.isActive = false;
     });
-    return this.houses;
   }
 
   getActivePin(): Pin {

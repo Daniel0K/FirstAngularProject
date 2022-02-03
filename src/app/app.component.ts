@@ -24,6 +24,7 @@ export class AppComponent {
   ) {
     this.getPinsByCookieFromMap();
     this.updateAllPinsByCookieFromMap();
+    this.pinsService.clearActivePinFlag();
     this.currentHouses = pinsService.getCurrentHouses();
     this.subActivePin = this.pinsService.activePinStream$.subscribe(() => {
       this.activePin = this.pinsService.getActivePin();
