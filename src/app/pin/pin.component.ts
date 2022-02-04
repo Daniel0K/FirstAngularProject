@@ -25,6 +25,10 @@ export class PinComponent implements OnInit {
     return this.inputPin.x === undefined;
   }
 
+  isPreDefined() {
+    return this.inputPin.isPreDefined === true;
+  }
+
   changeStylePosition(x: number, y: number): void {
     this.styleCord = `top: ${x}px;left: ${y}px;`;
   }

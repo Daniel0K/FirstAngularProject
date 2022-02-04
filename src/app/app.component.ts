@@ -73,7 +73,12 @@ export class AppComponent {
       this.xClicked = e.clientX;
       this.pinsService.activeY = e.clientY - 10;
       this.yClicked = e.clientY - 10;
-      this.preDefinePin = { x: this.yClicked, y: this.xClicked } as Pin;
+      this.preDefinePin = {
+        x: this.yClicked,
+        y: this.xClicked,
+        isPreDefined: true,
+      } as Pin;
+      this.pinsService.clearActivePinFlag();
     }
   }
 

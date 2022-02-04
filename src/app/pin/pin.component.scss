@@ -12,3 +12,11 @@
   position: absolute;
   cursor: pointer;
 }
+.coordPinsGreen {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  filter: invert(72%) sepia(59%) saturate(5655%) hue-rotate(88deg)
+    brightness(117%) contrast(125%);
+  cursor: pointer;
+}
