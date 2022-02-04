@@ -12,6 +12,7 @@ export class AddHouseFormComponent {
   form: FormGroup;
   newHousePin: Pin = {} as Pin;
   isVisible: boolean = false;
+  // preDefinedPin:boolean;
 
   constructor(private pinsService: PinsService) {
     this.form = new FormGroup({
@@ -27,9 +28,9 @@ export class AddHouseFormComponent {
     });
   }
 
-  buttonToggle(): boolean {
+  changeVisibilityOfAddHouseForm() {
     this.isVisible = !this.isVisible;
-    return this.isVisible;
+    this.pinsService.setTempStatus(true);
   }
 
   submit() {
@@ -44,6 +45,8 @@ export class AddHouseFormComponent {
     };
     this.pinsService.addPin(this.newHousePin);
     this.pinsService.setActivePin(this.newHousePin);
-    this.buttonToggle();
+    this.changeVisibilityOfAddHouseForm();
+    this.pinsService.setTempStatus(false);
+    this.pinsService.preDefinePinStream$.next(null);
   }
 }

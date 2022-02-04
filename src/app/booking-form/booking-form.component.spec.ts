@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PinsFormComponent } from './pins-form.component';
+import { BookingFormComponent } from './booking-form.component';
 import { PinsService } from '../services/pins.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Bookings } from '../models/bookings';
 
 describe('PinsForm', () => {
-  let component: PinsFormComponent;
-  let fixture: ComponentFixture<PinsFormComponent>;
+  let component: BookingFormComponent;
+  let fixture: ComponentFixture<BookingFormComponent>;
   let service: PinsService;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PinsFormComponent],
+      declarations: [BookingFormComponent],
       providers: [ReactiveFormsModule, FormsModule, { provide: PinsService }],
     });
-    fixture = TestBed.createComponent(PinsFormComponent);
+    fixture = TestBed.createComponent(BookingFormComponent);
     component = fixture.componentInstance;
     service = fixture.debugElement.injector.get(PinsService);
   });

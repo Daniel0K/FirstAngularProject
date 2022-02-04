@@ -17,7 +17,8 @@ export class AppComponent {
   currentHouses: Pin[] = [];
   activePin: Pin;
   subActivePin: Subscription;
-  tempPin: Pin = {} as Pin;
+  subPreDefinePin: Subscription;
+  preDefinePin: Pin = {} as Pin;
 
   constructor(
     private pinsService: PinsService,
@@ -30,6 +31,11 @@ export class AppComponent {
     this.subActivePin = this.pinsService.activePinStream$.subscribe(() => {
       this.activePin = this.pinsService.getActivePin();
     });
+    this.subPreDefinePin = this.pinsService.preDefinePinStream$.subscribe(
+      () => {
+        this.preDefinePin = {} as Pin;
+      }
+    );
   }
 
   getPinsByCookieFromMap() {
@@ -62,14 +68,17 @@ export class AppComponent {
   }
 
   onClickMap(e: MouseEvent) {
-    this.pinsService.activeX = e.clientX;
-    this.xClicked = e.clientX;
-    this.pinsService.activeY = e.clientY - 10;
-    this.yClicked = e.clientY - 10;
-    this.tempPin = { x: this.yClicked, y: this.xClicked } as Pin;
+    if (this.pinsService.isPreDefinePinExist === true) {
+      this.pinsService.activeX = e.clientX;
+      this.xClicked = e.clientX;
+      this.pinsService.activeY = e.clientY - 10;
+      this.yClicked = e.clientY - 10;
+      this.preDefinePin = { x: this.yClicked, y: this.xClicked } as Pin;
+    }
   }
 
   onDestroy() {
     this.subActivePin.unsubscribe();
+    this.subPreDefinePin.unsubscribe();
   }
 }

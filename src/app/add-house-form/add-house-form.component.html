@@ -1,7 +1,7 @@
 <form
   (ngSubmit)="submit()"
   [formGroup]="form"
-  [ngStyle]="buttonToggle() ? { display: 'none' } : { display: 'block' }"
+  [ngStyle]="isVisible ? { display: 'block' } : { display: 'none' }"
   class="card"
 >
   <p>Добавление дома</p>
@@ -11,8 +11,8 @@
   <button [disabled]="form.invalid" class="btn" type="submit">Отправить</button>
 </form>
 <button
-  (click)="buttonToggle()"
-  [ngStyle]="buttonToggle() ? { display: 'none' } : { display: 'block' }"
+  (click)="changeVisibilityOfAddHouseForm()"
+  [ngStyle]="isVisible ? { display: 'none' } : { display: 'block' }"
   class="center"
 >
   Добавить дом

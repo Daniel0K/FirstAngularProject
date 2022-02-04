@@ -4,8 +4,8 @@
   *ngFor="let p of currentHouses"
   [inputPin]="p"
 ></app-pin>
-<app-pin [inputPin]="tempPin"></app-pin>
+<app-pin [inputPin]="preDefinePin"></app-pin>
 <div class="parent">
-  <app-pins-form [activePin]="activePin"></app-pins-form>
+  <app-booking-form [activePin]="activePin"></app-booking-form>
   <app-add-house-form></app-add-house-form>
 </div>

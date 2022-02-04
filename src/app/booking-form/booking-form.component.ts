@@ -7,11 +7,11 @@ import { BookingService } from '../services/booking.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-pins-form',
-  templateUrl: './pins-form.component.html',
-  styleUrls: ['./pins-form.component.scss'],
+  selector: 'app-booking-form',
+  templateUrl: './booking-form.component.html',
+  styleUrls: ['./booking-form.component.scss'],
 })
-export class PinsFormComponent {
+export class BookingFormComponent {
   @Input() activePin!: Pin;
   submittedBooking: Bookings = {} as Bookings;
   form: FormGroup;
