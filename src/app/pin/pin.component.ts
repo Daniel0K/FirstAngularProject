@@ -25,15 +25,13 @@ export class PinComponent implements OnInit {
     return this.inputPin.x === undefined;
   }
 
-  isPreDefined() {
-    return this.inputPin.isPreDefined === true;
-  }
-
   changeStylePosition(x: number, y: number): void {
     this.styleCord = `top: ${x}px;left: ${y}px;`;
   }
 
-  isActive() {
-    return this.inputPin.isActive;
+  setStyleByStatus(): string {
+    if (this.inputPin.isActive) return 'coordPinsBlue';
+    if (this.inputPin.isNotConfirmed) return 'coordPinsGreen';
+    else return 'coordPinsBlack';
   }
 }

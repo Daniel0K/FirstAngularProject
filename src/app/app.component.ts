@@ -17,8 +17,8 @@ export class AppComponent {
   currentHouses: Pin[] = [];
   activePin: Pin;
   subActivePin: Subscription;
-  subPreDefinePin: Subscription;
-  preDefinePin: Pin = {} as Pin;
+  subNotConfirmedPin: Subscription;
+  notConfirmedPin: Pin = {} as Pin;
 
   constructor(
     private pinsService: PinsService,
@@ -31,9 +31,9 @@ export class AppComponent {
     this.subActivePin = this.pinsService.activePinStream$.subscribe(() => {
       this.activePin = this.pinsService.getActivePin();
     });
-    this.subPreDefinePin = this.pinsService.preDefinePinStream$.subscribe(
+    this.subNotConfirmedPin = this.pinsService.notConfirmedPinStream$.subscribe(
       () => {
-        this.preDefinePin = {} as Pin;
+        this.notConfirmedPin = {} as Pin;
       }
     );
   }
@@ -68,15 +68,15 @@ export class AppComponent {
   }
 
   onClickMap(e: MouseEvent) {
-    if (this.pinsService.isPreDefinePinExist === true) {
+    if (this.pinsService.isNotConfirmedPinExist === true) {
       this.pinsService.activeX = e.clientX;
       this.xClicked = e.clientX;
       this.pinsService.activeY = e.clientY - 10;
       this.yClicked = e.clientY - 10;
-      this.preDefinePin = {
+      this.notConfirmedPin = {
         x: this.yClicked,
         y: this.xClicked,
-        isPreDefined: true,
+        isNotConfirmed: true,
       } as Pin;
       this.pinsService.clearActivePinFlag();
     }
@@ -84,6 +84,6 @@ export class AppComponent {
 
   onDestroy() {
     this.subActivePin.unsubscribe();
-    this.subPreDefinePin.unsubscribe();
+    this.subNotConfirmedPin.unsubscribe();
   }
 }

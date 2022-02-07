@@ -58,13 +58,13 @@ describe('AppComponent', () => {
   });
 
   it('should set active pin by value', () => {
-    service.isPreDefinePinExist = true;
+    service.isNotConfirmedPinExist = true;
     const e: MouseEvent = new MouseEvent('mousemove', {
       clientX: 50,
       clientY: 150,
       buttons: 1,
     });
-    service.isPreDefinePinExist = true;
+    service.isNotConfirmedPinExist = true;
 
     component.onClickMap(e);
 

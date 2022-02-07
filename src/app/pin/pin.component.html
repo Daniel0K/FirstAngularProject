@@ -1,13 +1,6 @@
 <div></div>
 <img
-  [ngClass]="isActive() ? 'coordPinsBlue' : 'coordPinsBlack'"
-  [ngClass]="
-    isPreDefined()
-      ? 'coordPinsGreen'
-      : isActive()
-      ? 'coordPinsBlue'
-      : 'coordPinsBlack'
-  "
+  [ngClass]="setStyleByStatus()"
   [ngStyle]="isTemp() ? { display: 'none' } : { display: 'block' }"
   src="assets/pin.svg"
   style="{{ styleCord }}"

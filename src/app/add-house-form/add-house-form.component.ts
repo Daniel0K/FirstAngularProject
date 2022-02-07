@@ -12,7 +12,6 @@ export class AddHouseFormComponent {
   form: FormGroup;
   newHousePin: Pin = {} as Pin;
   isVisible: boolean = false;
-  // preDefinedPin:boolean;
 
   constructor(private pinsService: PinsService) {
     this.form = new FormGroup({
@@ -47,6 +46,6 @@ export class AddHouseFormComponent {
     this.pinsService.setActivePin(this.newHousePin);
     this.changeVisibilityOfAddHouseForm();
     this.pinsService.setTempStatus(false);
-    this.pinsService.preDefinePinStream$.next(null);
+    this.pinsService.notConfirmedPinStream$.next(null);
   }
 }

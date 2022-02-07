@@ -5,7 +5,7 @@ export interface Pin {
   x: number;
   booked: Bookings[];
   isActive?: boolean;
-  isPreDefined?: boolean;
+  isNotConfirmed?: boolean;
   y: number;
   name: string;
   address: string;

@@ -68,8 +68,8 @@ export class PinsService {
   activeY: number = 999;
   additionalHousesCookies: Pin[] = [];
   activePinStream$: Subject<Pin> = new Subject<Pin>();
-  preDefinePinStream$: Subject<boolean> = new Subject<boolean>();
-  isPreDefinePinExist: boolean = false;
+  notConfirmedPinStream$: Subject<boolean> = new Subject<boolean>();
+  isNotConfirmedPinExist: boolean = false;
 
   getCurrentHouses(): Pin[] {
     return this.houses;
@@ -102,6 +102,6 @@ export class PinsService {
   }
 
   setTempStatus(value: boolean) {
-    this.isPreDefinePinExist = value;
+    this.isNotConfirmedPinExist = value;
   }
 }
