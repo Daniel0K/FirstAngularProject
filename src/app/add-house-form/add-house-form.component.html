@@ -1,7 +1,14 @@
-<form class="card" [formGroup]="form" (ngSubmit)="submit()">
+<form (ngSubmit)="submit()" [formGroup]="form" *ngIf="isVisible" class="card">
   <p>Добавление дома</p>
-  <input type="text" placeholder="Страна" formControlName="country">
-  <input type="text" placeholder="Улица" formControlName="street">
-  <input type="text" placeholder="Описание" formControlName="desc">
-  <button class="btn" type="submit" [disabled]="form.invalid">Отправить</button>
+  <input formControlName="country" placeholder="Страна" type="text" />
+  <input formControlName="street" placeholder="Улица" type="text" />
+  <input formControlName="desc" placeholder="Описание" type="text" />
+  <button [disabled]="form.invalid" class="btn" type="submit">Отправить</button>
 </form>
+<button
+  (click)="changeVisibilityOfAddHouseForm()"
+  [ngStyle]="isVisible ? { display: 'none' } : { display: 'block' }"
+  class="center"
+>
+  Добавить дом
+</button>

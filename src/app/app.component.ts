@@ -15,8 +15,10 @@ export class AppComponent {
   yClicked: number = 0;
   parsedCookie: Pin[] = [];
   currentHouses: Pin[] = [];
-  activePin: Pin = null;
+  activePin: Pin;
   subActivePin: Subscription;
+  subNotConfirmedPin: Subscription;
+  notConfirmedPin: Pin = {} as Pin;
 
   constructor(
     private pinsService: PinsService,
@@ -29,6 +31,11 @@ export class AppComponent {
     this.subActivePin = this.pinsService.activePinStream$.subscribe(() => {
       this.activePin = this.pinsService.getActivePin();
     });
+    this.subNotConfirmedPin = this.pinsService.notConfirmedPinStream$.subscribe(
+      () => {
+        this.notConfirmedPin = {} as Pin;
+      }
+    );
   }
 
   getPinsByCookieFromMap() {
@@ -61,13 +68,22 @@ export class AppComponent {
   }
 
   onClickMap(e: MouseEvent) {
-    this.pinsService.activeX = e.clientX;
-    this.xClicked = e.clientX;
-    this.pinsService.activeY = e.clientY - 10;
-    this.yClicked = e.clientY - 10;
+    if (this.pinsService.isNotConfirmedPinExist === true) {
+      this.pinsService.activeX = e.clientX;
+      this.xClicked = e.clientX;
+      this.pinsService.activeY = e.clientY - 10;
+      this.yClicked = e.clientY - 10;
+      this.notConfirmedPin = {
+        x: this.yClicked,
+        y: this.xClicked,
+        isNotConfirmed: true,
+      } as Pin;
+      this.pinsService.clearActivePinFlag();
+    }
   }
 
   onDestroy() {
     this.subActivePin.unsubscribe();
+    this.subNotConfirmedPin.unsubscribe();
   }
 }

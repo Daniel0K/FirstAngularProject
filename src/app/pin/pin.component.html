@@ -1,0 +1,7 @@
+<div></div>
+<img
+  [ngClass]="setStyleByStatus()"
+  [ngStyle]="isTemp() ? { display: 'none' } : { display: 'block' }"
+  src="assets/pin.svg"
+  style="{{ styleCord }}"
+/>

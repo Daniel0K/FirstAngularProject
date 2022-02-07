@@ -9,9 +9,17 @@
 .map {
   width: 1280px;
   height: 720px;
-  background-image: url('images/world.svg');
-
+  background-image: url("images/world.svg");
+  position: absolute;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+}
+.parent {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  margin-left: auto;
 }

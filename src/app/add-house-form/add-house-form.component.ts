@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PinsService } from '../services/pins.service';
-import {Pin} from "../models/pin";
+import { Pin } from '../models/pin';
 
 @Component({
   selector: 'app-add-house-form',
@@ -11,6 +11,7 @@ import {Pin} from "../models/pin";
 export class AddHouseFormComponent {
   form: FormGroup;
   newHousePin: Pin = {} as Pin;
+  isVisible: boolean = false;
 
   constructor(private pinsService: PinsService) {
     this.form = new FormGroup({
@@ -26,6 +27,11 @@ export class AddHouseFormComponent {
     });
   }
 
+  changeVisibilityOfAddHouseForm() {
+    this.isVisible = !this.isVisible;
+    this.pinsService.setTempStatus(true);
+  }
+
   submit() {
     this.newHousePin = {
       id: this.pinsService.houses.length,
@@ -38,5 +44,8 @@ export class AddHouseFormComponent {
     };
     this.pinsService.addPin(this.newHousePin);
     this.pinsService.setActivePin(this.newHousePin);
+    this.changeVisibilityOfAddHouseForm();
+    this.pinsService.setTempStatus(false);
+    this.pinsService.notConfirmedPinStream$.next(null);
   }
 }

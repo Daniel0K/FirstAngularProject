@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { PinsService } from './services/pins.service';
 import { AddHouseFormComponent } from './add-house-form/add-house-form.component';
-import { PinsComponent } from './pins/pins.component';
-import { PinsFormComponent } from './pins-form/pins-form.component';
+import { PinComponent } from './pin/pin.component';
+import { BookingFormComponent } from './booking-form/booking-form.component';
 import { Pin } from './models/pin';
 
 describe('AppComponent', () => {
@@ -15,9 +15,9 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        PinsComponent,
+        PinComponent,
         AddHouseFormComponent,
-        PinsFormComponent,
+        BookingFormComponent,
       ],
       providers: [{ provide: PinsService }],
     }).compileComponents();
@@ -58,17 +58,21 @@ describe('AppComponent', () => {
   });
 
   it('should set active pin by value', () => {
+    service.isNotConfirmedPinExist = true;
     const e: MouseEvent = new MouseEvent('mousemove', {
       clientX: 50,
       clientY: 150,
       buttons: 1,
     });
+    service.isNotConfirmedPinExist = true;
+
     component.onClickMap(e);
+
     expect(service.activeX).toBe(50);
     expect(service.activeY).toBe(140);
   });
 
-  it('should push new pins to service houses', () => {
+  it('should push new pin to service houses', () => {
     document.cookie =
       'pin=[{"id":6,"x":82,"y":675,"name":"sdfsdfs","address":"jhkjhkj","desc":"jkhjkhkjhk","booked":[]},{"id":7,"x":311,"y":84,"name":"sdfsdfs","address":"jhkjhkj","desc":"jkhjkhkjhk","booked":[]}]';
     component.getPinsByCookieFromMap();

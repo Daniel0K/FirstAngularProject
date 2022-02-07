@@ -68,6 +68,8 @@ export class PinsService {
   activeY: number = 999;
   additionalHousesCookies: Pin[] = [];
   activePinStream$: Subject<Pin> = new Subject<Pin>();
+  notConfirmedPinStream$: Subject<boolean> = new Subject<boolean>();
+  isNotConfirmedPinExist: boolean = false;
 
   getCurrentHouses(): Pin[] {
     return this.houses;
@@ -97,5 +99,9 @@ export class PinsService {
     this.houses.push(p);
     this.additionalHousesCookies.push(p);
     document.cookie = `pin=${JSON.stringify(this.additionalHousesCookies)}`;
+  }
+
+  setTempStatus(value: boolean) {
+    this.isNotConfirmedPinExist = value;
   }
 }
