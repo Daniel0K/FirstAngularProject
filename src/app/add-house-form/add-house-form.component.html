@@ -1,8 +1,26 @@
 <form (ngSubmit)="submit()" [formGroup]="form" *ngIf="isVisible" class="card">
   <p>Добавление дома</p>
   <input formControlName="country" placeholder="Страна" type="text" />
+  <div
+    *ngIf="form.get('country').invalid && form.get('country').touched"
+    class="validator"
+  >
+    <small>"Страна" не может быть меньше 6 символов</small>
+  </div>
   <input formControlName="street" placeholder="Улица" type="text" />
+  <div
+    *ngIf="form.get('street').invalid && form.get('street').touched"
+    class="validator"
+  >
+    <small>"Улица" не может быть меньше 6 символов</small>
+  </div>
   <input formControlName="desc" placeholder="Описание" type="text" />
+  <div
+    *ngIf="form.get('desc').invalid && form.get('desc').touched"
+    class="validator"
+  >
+    <small>"Описание" не может быть меньше 6 символов</small>
+  </div>
   <button [disabled]="form.invalid" class="btn" type="submit">Отправить</button>
 </form>
 <button
